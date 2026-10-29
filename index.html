@@ -406,6 +406,28 @@ button:hover{filter:brightness(1.06)}input,select{border-radius:13px!important}
 #page-map .pref-items .place-link{display:flex!important;appearance:none!important;-webkit-appearance:none!important}
 #page-map .pref-items .place-link::before,#page-map .pref-items .place-link::after,#page-map .pref-items .item::before,#page-map .pref-items .item>div:first-child::before{content:none!important;display:none!important}
 #page-map .pref-items .place-link::marker,#page-map .pref-items .item::marker{content:''!important;font-size:0!important}
+
+/* Android: 地図から「位置の修正」までを、一覧スクロール中も固定する */
+@media (max-width:899px){
+ #page-map .workspace{align-items:stretch!important;overflow:visible!important}
+ #page-map .map-dock{
+   position:sticky!important;
+   top:var(--onsen-header-height,90px)!important;
+   z-index:900!important;
+   align-self:stretch!important;
+   max-height:calc(100dvh - var(--onsen-header-height,90px) - 6px)!important;
+   overflow-y:auto!important;
+   overscroll-behavior:contain!important;
+   scrollbar-width:thin;
+   background:#fff1d4!important;
+   box-shadow:0 5px 14px #3b291e40!important;
+ }
+ #page-map #map{height:clamp(140px,22dvh,215px)!important;min-height:140px!important;max-height:215px!important}
+ #page-map .list-area{position:relative!important;z-index:1!important}
+}
+@media (max-width:420px){
+ #page-map #map{height:clamp(125px,19dvh,175px)!important;min-height:125px!important;max-height:175px!important}
+}
 </style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1><nav class="page-menu" aria-label="ページ切り替え"><button type="button" class="page-tab active" data-page="map" aria-current="page">🗺️ 温泉マップ</button><button type="button" class="page-tab" data-page="second">♨️ スタンプカード</button></nav></div></header><main class="wrap"><div id="page-map"><div class="workspace">
  <div class="map-dock">
   <div id="map"></div>
@@ -591,4 +613,13 @@ $('locate').onclick=()=>{
  firstButton?.scrollIntoView({behavior:'smooth',block:'nearest'});
 };
 $('search').addEventListener('keydown',e=>{if(e.key==='Enter')$('locate').click()});
-render();renderStamps();</script></body></html>
+render();renderStamps();</script><script>
+(function(){
+ const header=document.querySelector('header');
+ if(!header)return;
+ const update=()=>document.documentElement.style.setProperty('--onsen-header-height',Math.ceil(header.getBoundingClientRect().height)+'px');
+ update();
+ window.addEventListener('resize',update,{passive:true});
+ if(typeof ResizeObserver!=='undefined')new ResizeObserver(update).observe(header);
+})();
+</script></body></html>
