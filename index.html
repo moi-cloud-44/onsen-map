@@ -1,0 +1,241 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>全国温泉訪問マップ</title><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><style>
+:root{font-family:system-ui,-apple-system,sans-serif;color:#17362e;background:#f3f7f5}*{box-sizing:border-box}body{margin:0}header{background:white;padding:18px 20px;box-shadow:0 1px 8px #dce5e0}h1{font-size:23px;margin:0 0 6px}p{margin:6px 0}.sub{color:#61766d;font-size:13px}.wrap{max-width:1150px;margin:auto;padding:14px}#map{height:52vh;min-height:340px;border-radius:14px;overflow:hidden}button,input,select{font:inherit;border:1px solid #c8d7cf;border-radius:9px;padding:10px;background:#fff}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}.primary{background:#187d5b;color:#fff;border-color:#187d5b}.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0}.stats{display:flex;gap:12px;flex-wrap:wrap}.stat{background:#fff;padding:10px 16px;border-radius:12px;min-width:110px}.stat b{font-size:22px;display:block}.stat small{color:#61766d}.grid{display:block}.region-section{margin:22px 0 30px}.region-heading{font-size:21px;margin:0 0 12px;padding:10px 14px;background:#e2efe8;border-left:5px solid #187d5b;border-radius:7px}.pref-section{margin:14px 0 20px}.pref-heading{font-size:17px;margin:0 0 9px;padding:0 0 7px;border-bottom:1px solid #cbdcd2}.pref-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}.item{background:white;border-radius:12px;padding:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}.item strong{display:block}.item small{color:#6b7e74}.done{background:#d9f4e6;color:#096343;border-color:#b0dfc8}.status{font-size:13px;min-height:20px;margin:9px 0}.pin{width:18px;height:18px;border-radius:50%;background:#159966;border:3px solid white;box-shadow:0 1px 6px #666}.pin.yes{background:#df6158}.note{font-size:12px;color:#61766d;margin:12px 0}.settings{background:#fff;border-radius:12px;padding:12px;margin:12px 0}.settings input{width:min(100%,620px)}.hide{display:none}.warn{color:#a64036}.review{background:#fff4d6;border:1px solid #e9c56b;border-radius:8px;padding:8px}.reviewpanel{background:white;padding:12px;border-radius:12px;margin:12px 0}.reviewpanel button{margin:3px}.pin.pending{background:#e6a51b}.pin.yes{background:#df6158}#search{flex:1;min-width:180px}a{color:#176f53}.place-link{border:0;background:transparent;padding:2px 0;text-align:left;font-weight:700;cursor:pointer;color:#17362e}.place-link:hover{text-decoration:underline;color:#187d5b}.item.active{outline:3px solid #e7a31c;background:#fff8e5}.pin.highlight{outline:4px solid #ffd44b;outline-offset:3px;box-shadow:0 0 0 7px #f6c84588}.editpanel{background:#e9f6f0;border:1px solid #b7d8c8;padding:12px;border-radius:10px;margin:10px 0}.visit-choice{display:inline-flex;gap:4px;white-space:nowrap}.visit-choice button{min-width:44px;padding:8px 10px}.visit-choice button[aria-pressed="true"]{background:#187d5b;color:#fff;border-color:#187d5b;font-weight:700}.visit-choice button[data-visit="no"][aria-pressed="true"]{background:#b54b44;border-color:#b54b44}#map{overscroll-behavior:contain;position:sticky;top:8px;z-index:500;box-shadow:0 4px 18px #0002;background:#e5eee9}@media(max-height:650px){#map{height:42vh;min-height:230px}} 
+:root{--ink:#203c35;--accent:#14775b;--cream:#faf7f0;--line:#dce8e1}
+body{background:linear-gradient(145deg,#eef6f1,#f9f7f1 65%);color:var(--ink)}
+header{background:#123e32;color:#fff;box-shadow:none;padding:13px 22px}
+header h1{font-size:22px;letter-spacing:.03em}
+header .sub{color:#c8e1d6}
+.wrap{max-width:1240px;padding:12px 16px 32px}
+.settings{margin:0 0 10px;padding:9px 14px;border:1px solid #dce8e1}
+.settings:has(#connection:not(.warn)){background:#fff}
+.settings .toolbar{margin:5px 0}.settings .sub{margin:2px 0}
+.workspace{display:flex;flex-direction:column;gap:16px}
+.map-dock{position:sticky;top:0;z-index:600;background:#f7faf7;padding:9px 10px 10px;border:1px solid #d9e8df;border-radius:18px;box-shadow:0 12px 30px #1e4a3a16}
+.map-topline{display:flex;justify-content:space-between;align-items:center;padding:0 5px 8px;gap:12px}
+.eyebrow{font-size:10px;letter-spacing:.18em;font-weight:800;color:#598578}
+.map-legend{display:flex;gap:11px;align-items:center;font-size:11px;color:#557266}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:3px}.dot.green{background:#159966}.dot.red{background:#df6158}.dot.gold{background:#e6a51b}
+#map{height:38vh;min-height:220px;max-height:420px;position:relative;top:auto;border-radius:13px;box-shadow:none;z-index:1}
+.dashboard{padding:10px 5px 0}
+.stats{gap:8px}.stat{min-width:0;flex:1;padding:9px 13px;border:1px solid #e1ebe4;box-shadow:0 1px 5px #214c3710}
+.stat small{font-size:11px}.stat b{font-size:22px;line-height:1.2}.stat span{font-size:9px;letter-spacing:.12em;color:#94a89c}
+.progress{height:5px;background:#e5eee8;border-radius:12px;overflow:hidden;margin:8px 0}
+#progressbar{height:100%;width:0;background:linear-gradient(90deg,#70b998,#168360);transition:width .3s}
+.toolbar{margin:8px 0;gap:7px}
+.toolbar input,.toolbar select,.toolbar button{min-height:38px;padding:8px 11px}
+#search{min-width:150px}
+.primary{background:#14775b}
+.status{margin:4px 0 0;font-size:12px;min-height:16px}
+.list-area{background:#fff;border:1px solid #e1eae4;border-radius:18px;padding:16px 18px;box-shadow:0 8px 24px #1644310c}
+.list-title{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #e7eee9;padding-bottom:10px}
+.list-title h2{margin:3px 0;font-size:20px}
+.region-section{margin:18px 0 25px}.region-heading{background:#eaf3ed;border-left:4px solid #187d5b;font-size:18px}
+.pref-heading{font-size:15px}.pref-items{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.item{border:1px solid #e4eee8;box-shadow:0 2px 6px #174c2e08;transition:border-color .15s,box-shadow .15s}
+.item:hover{border-color:#99cdb2;box-shadow:0 3px 12px #174c2e16}
+.visit-choice button{min-width:36px;padding:7px 9px}
+.reviewpanel{margin-top:16px;border:1px solid #dce8e1;background:#f7faf8;border-radius:12px;padding:12px}
+.reviewpanel summary{cursor:pointer;font-weight:700}.reviewpanel #review{padding-top:12px}
+@media(max-width:700px){
+ header{padding:10px 13px}header h1{font-size:18px}
+ .wrap{padding:7px}.map-dock{padding:7px;border-radius:12px}
+ #map{height:32vh;min-height:180px}
+ .map-legend{font-size:9px;gap:5px}
+ .toolbar button{font-size:11px}
+ .stat{padding:7px}.stat b{font-size:19px}
+ .list-area{padding:12px}.pref-items{grid-template-columns:1fr}
+}
+@media(max-height:680px){#map{height:28vh;min-height:170px}}
+
+@media(min-width:900px){
+ .wrap{max-width:1560px;padding:12px 18px}
+ .workspace{display:grid;grid-template-columns:minmax(420px, 47%) minmax(0,53%);align-items:start;gap:16px}
+ .map-dock{position:sticky;top:10px;align-self:start;max-height:calc(100vh - 20px);overflow-y:auto;scrollbar-width:thin}
+ #map{height:clamp(330px,52vh,650px);max-height:none;min-height:320px;position:relative;top:auto}
+ .list-area{min-width:0;max-height:calc(100vh - 20px);overflow-y:auto;scrollbar-width:thin}
+ .pref-items{grid-template-columns:1fr}
+ .toolbar{gap:6px}
+ .toolbar input,.toolbar select,.toolbar button{font-size:12px}
+ .map-legend{font-size:10px;gap:6px}
+}
+.missing-row{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #e2e9e3;padding:10px 3px}
+.missing-row small{display:block;color:#637d70;margin-top:3px}
+.missing-row>div:last-child{display:flex;gap:7px;align-items:center;flex-shrink:0}
+.missing-row button{padding:7px 9px;font-size:12px}
+.missing-row a{font-size:12px;white-space:nowrap}
+@media(max-width:600px){.missing-row{flex-direction:column;align-items:start}.missing-row>div:last-child{width:100%}}
+.visit-choice button[data-visit="yes"][aria-pressed="true"]{background:#d9534f!important;border-color:#d9534f!important;color:#fff!important}.visit-choice button[data-visit="no"][aria-pressed="true"]{background:#16835c!important;border-color:#16835c!important;color:#fff!important}.coordinate-paste{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:10px 0}.coordinate-paste input{flex:1;min-width:190px;max-width:100%;font-variant-numeric:tabular-nums}.coordinate-paste label{font-size:12px;font-weight:700}.coordinate-hint{font-size:11px;color:#657d70;margin:3px 0 8px}.map-dock .reviewpanel{margin-top:10px}.map-dock .reviewpanel #review{max-height:none;overflow:visible} 
+.map-dock .reviewpanel{padding:10px 12px;margin-top:7px}
+.compact-editor{padding:10px;margin:7px 0 0}
+.edit-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.edit-tip{font-size:12px;margin:7px 0}
+.edit-actions{display:flex;align-items:center;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.edit-actions button{font-size:12px;padding:6px 8px;margin:0}
+.edit-actions a{font-size:12px}
+.edit-section-title{display:block;font-size:13px;margin:7px 0 5px}
+.edit-field{display:flex;gap:9px;align-items:center;font-size:12px;font-weight:700}
+.edit-field input{flex:1;min-width:0;padding:7px 9px;font-size:12px}
+.coordinate-hint{margin:3px 0 7px;font-size:11px}
+.edit-coord-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.edit-coord-pair label{display:flex;align-items:center;gap:6px;font-size:12px}
+.edit-coord-pair input{width:100%;min-width:0;padding:7px 8px;font-size:12px}
+.edit-flow{display:flex;flex-direction:column;align-items:stretch;gap:2px;margin-top:8px}
+.edit-flow button{margin:0;padding:8px 10px;font-size:13px;font-weight:700}
+.edit-arrow{text-align:center;color:#739585;font-weight:700;line-height:1}
+@media(min-width:900px){.map-dock{max-height:calc(100vh - 20px);overflow-y:auto}.map-dock .reviewpanel #review{overflow:visible}}
+
+.simple-editor{padding:12px!important;background:#fff!important;border:1px solid #dce8e1!important;border-radius:12px!important}
+.simple-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.simple-head b{font-size:15px}
+.simple-state{font-size:11px;color:#177658;background:#e6f4ec;padding:4px 8px;border-radius:20px;white-space:nowrap}
+.simple-help{font-size:12px;color:#627b70;margin-bottom:10px}
+.simple-label{display:block;font-size:12px;font-weight:700;margin-bottom:5px}
+.simple-editor input[data-coord]{display:block;width:100%;box-sizing:border-box;min-height:42px;border:1px solid #bbd2c5;border-radius:8px;padding:9px 11px;font-size:14px}
+.simple-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.simple-buttons button{min-height:42px;font-weight:700;border-radius:8px}
+.simple-bottom{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:9px;flex-wrap:wrap}
+.simple-bottom button{background:transparent;border:0;padding:3px 0;color:#246b58;text-decoration:underline;font-size:12px}
+.simple-bottom a{font-size:12px}
+.simple-feedback{margin-top:8px;color:#688177;font-size:11px}
+#review-details{padding:8px!important}
+#review-details summary{font-size:13px}
+@media(min-width:900px){.map-dock{overflow-y:auto}.simple-editor{padding:10px!important}}
+.connection-footer{margin:22px 0 8px}.connection-footer .settings{background:#fff;border:1px solid #dce8e1;border-radius:12px;padding:12px 16px}.connection-footer .settings .toolbar{max-width:750px}</style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1></div></header><main class="wrap"><div class="workspace">
+ <div class="map-dock">
+  <div class="map-topline"><span class="eyebrow">JAPAN ONSEN JOURNAL</span><span class="map-legend"><i class="dot red"></i>訪問済み <i class="dot green"></i>未訪問 <i class="dot gold"></i>位置未確認</span></div>
+  <div id="map"></div>
+  <div class="dashboard">
+   <div class="stats"><div class="stat"><small>登録温泉</small><b id="total">0</b><span>SPOTS</span></div><div class="stat"><small>訪問済み</small><b id="visited">0</b><span>VISITED</span></div><div class="stat"><small>達成率</small><b id="rate">0%</b><span>PROGRESS</span></div></div>
+   <div class="progress"><div id="progressbar"></div></div>
+   <div class="toolbar"><input id="search" placeholder="🔎 温泉名・都道府県で検索" aria-label="温泉を検索"><select id="filter" aria-label="訪問状況で絞り込み"><option value="all">すべて</option><option value="yes">訪問済み</option><option value="no">未訪問</option><option value="missing">位置未登録</option><option value="pending">位置未確定</option></select><button id="locate">検索</button><button id="bulk" class="primary">未登録地点を自動検索</button><button id="stop" disabled>検索停止</button></div>
+   <p class="status" id="status" role="status">温泉を選択すると、地図上で位置を確認できます。</p>
+   <details class="reviewpanel" id="review-details"><summary>📍 位置の確認・修正 <span class="sub" id="geostats">読み込み中</span></summary><div id="review"></div></details>
+  </div>
+ </div>
+ <div class="list-area">
+  <div class="list-title"><div><span class="eyebrow">YOUR JOURNEY</span><h2>温泉一覧</h2></div><span class="sub">地方・都道府県別</span></div>
+  <div class="grid" id="list"></div>
+  <details class="reviewpanel" id="missing-details" open><summary>📍 位置未登録の温泉 <span class="sub" id="missing-count"></span></summary><div id="missing-list"></div></details>
+  <p class="note">🟢 未訪問　🔴 訪問済み　🟡 位置未確認。温泉名を選択すると地図上で強調表示します。位置の変更は「位置の確認・修正」から行えます。</p>
+ </div>
+</div><div class="connection-footer"><section class="settings"><b>クラウド接続</b><p class="sub">Firebase Realtime Database のURLを入力してください（設定後はこの端末に記憶）。</p><div class="toolbar"><input id="dburl" placeholder="https://YOUR-DATABASE.firebasedatabase.app" aria-label="データベースURL"><button class="primary" id="connect">接続する</button></div><div class="status" id="connection">未接続：訪問記録は共有されません</div></section></div></main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
+const PLACES=[{"id": "onsen_001", "name": "登別温泉", "pref": "北海道", "mapName": "登別温泉"}, {"id": "onsen_002", "name": "平磯温泉", "pref": "北海道", "mapName": "料亭湯宿 銀鱗荘"}, {"id": "onsen_003", "name": "十勝川温泉", "pref": "北海道", "mapName": "十勝川温泉"}, {"id": "onsen_004", "name": "定山渓温泉", "pref": "北海道", "mapName": "定山渓温泉"}, {"id": "onsen_005", "name": "阿寒湖温泉", "pref": "北海道", "mapName": "阿寒湖温泉"}, {"id": "onsen_006", "name": "湯の川温泉", "pref": "北海道", "mapName": "湯の川温泉"}, {"id": "onsen_007", "name": "層雲峡温泉", "pref": "北海道", "mapName": "層雲峡温泉"}, {"id": "onsen_008", "name": "洞爺湖温泉", "pref": "北海道", "mapName": "洞爺湖温泉"}, {"id": "onsen_009", "name": "川湯温泉", "pref": "北海道", "mapName": "川湯温泉"}, {"id": "onsen_010", "name": "ウトロ温泉", "pref": "北海道", "mapName": "ウトロ温泉"}, {"id": "onsen_011", "name": "ニセコ温泉郷", "pref": "北海道", "mapName": "ニセコ温泉郷"}, {"id": "onsen_012", "name": "酸ヶ湯温泉", "pref": "青森県", "mapName": "酸ヶ湯温泉旅館"}, {"id": "onsen_013", "name": "黄金崎不老ふ死温泉", "pref": "青森県", "mapName": "黄金崎不老ふ死温泉"}, {"id": "onsen_014", "name": "花巻温泉郷", "pref": "岩手県", "mapName": "花巻温泉 ホテル紅葉館"}, {"id": "onsen_015", "name": "つなぎ温泉", "pref": "岩手県", "mapName": "繋温泉"}, {"id": "onsen_016", "name": "秋保温泉", "pref": "宮城県", "mapName": "秋保温泉"}, {"id": "onsen_017", "name": "鳴子温泉", "pref": "宮城県", "mapName": "鳴子温泉"}, {"id": "onsen_018", "name": "松島温泉", "pref": "宮城県", "mapName": "松島温泉"}, {"id": "onsen_019", "name": "作並温泉", "pref": "宮城県", "mapName": "作並温泉"}, {"id": "onsen_020", "name": "乳頭温泉郷", "pref": "秋田県", "mapName": "乳頭温泉郷 鶴の湯温泉"}, {"id": "onsen_021", "name": "玉川温泉", "pref": "秋田県", "mapName": "玉川温泉"}, {"id": "onsen_022", "name": "銀山温泉", "pref": "山形県", "mapName": "銀山温泉"}, {"id": "onsen_023", "name": "蔵王温泉", "pref": "山形県", "mapName": "蔵王温泉"}, {"id": "onsen_024", "name": "あつみ温泉", "pref": "山形県", "mapName": "あつみ温泉"}, {"id": "onsen_025", "name": "かみのやま温泉", "pref": "山形県", "mapName": "上山温泉"}, {"id": "onsen_026", "name": "母畑温泉", "pref": "福島県", "mapName": "母畑温泉"}, {"id": "onsen_027", "name": "高湯温泉", "pref": "福島県", "mapName": "高湯温泉"}, {"id": "onsen_028", "name": "芦ノ牧温泉", "pref": "福島県", "mapName": "芦ノ牧温泉"}, {"id": "onsen_029", "name": "飯坂温泉", "pref": "福島県", "mapName": "飯坂温泉"}, {"id": "onsen_030", "name": "東山温泉", "pref": "福島県", "mapName": "東山温泉"}, {"id": "onsen_031", "name": "鬼怒川・川治温泉", "pref": "栃木県", "mapName": "鬼怒川温泉"}, {"id": "onsen_032", "name": "湯西川温泉", "pref": "栃木県", "mapName": "湯西川温泉"}, {"id": "onsen_033", "name": "那須温泉", "pref": "栃木県", "mapName": "那須湯本温泉"}, {"id": "onsen_034", "name": "奥日光湯元温泉", "pref": "栃木県", "mapName": "奥日光湯元温泉源泉"}, {"id": "onsen_035", "name": "塩原温泉", "pref": "栃木県", "mapName": "塩原温泉 渓雲閣"}, {"id": "onsen_036", "name": "日光温泉", "pref": "栃木県", "mapName": "日光温泉 ほの香"}, {"id": "onsen_037", "name": "草津温泉", "pref": "群馬県", "mapName": "草津温泉"}, {"id": "onsen_038", "name": "伊香保温泉", "pref": "群馬県", "mapName": "伊香保温泉"}, {"id": "onsen_039", "name": "万座温泉", "pref": "群馬県", "mapName": "万座温泉"}, {"id": "onsen_040", "name": "四万温泉", "pref": "群馬県", "mapName": "四万温泉"}, {"id": "onsen_041", "name": "みなかみ18湯", "pref": "群馬県", "mapName": "水上温泉"}, {"id": "onsen_042", "name": "箱根温泉", "pref": "神奈川県", "mapName": "箱根温泉"}, {"id": "onsen_043", "name": "湯河原温泉", "pref": "神奈川県", "mapName": "湯河原温泉"}, {"id": "onsen_044", "name": "月岡温泉", "pref": "新潟県", "mapName": "月岡温泉"}, {"id": "onsen_045", "name": "越後湯沢温泉", "pref": "新潟県", "mapName": "越後湯沢温泉"}, {"id": "onsen_046", "name": "松之山温泉", "pref": "新潟県", "mapName": "松之山温泉"}, {"id": "onsen_047", "name": "富士山石和温泉", "pref": "山梨県", "mapName": "石和温泉みなもと旅館"}, {"id": "onsen_048", "name": "河口湖温泉", "pref": "山梨県", "mapName": "河口湖温泉"}, {"id": "onsen_049", "name": "上諏訪温泉", "pref": "長野県", "mapName": "上諏訪温泉"}, {"id": "onsen_050", "name": "昼神温泉", "pref": "長野県", "mapName": "昼神温泉"}, {"id": "onsen_051", "name": "白骨温泉", "pref": "長野県", "mapName": "白骨温泉"}, {"id": "onsen_052", "name": "湯田中渋温泉郷", "pref": "長野県", "mapName": "湯田中渋温泉郷"}, {"id": "onsen_053", "name": "別所温泉", "pref": "長野県", "mapName": "別所温泉"}, {"id": "onsen_054", "name": "野沢温泉", "pref": "長野県", "mapName": "野沢温泉村"}, {"id": "onsen_055", "name": "扉温泉", "pref": "長野県", "mapName": "扉温泉明神館"}, {"id": "onsen_056", "name": "宇奈月温泉", "pref": "富山県", "mapName": "宇奈月温泉"}, {"id": "onsen_057", "name": "金太郎温泉", "pref": "富山県", "mapName": "金太郎温泉 光風閣"}, {"id": "onsen_058", "name": "和倉温泉", "pref": "石川県", "mapName": "和倉温泉"}, {"id": "onsen_059", "name": "山代温泉", "pref": "石川県", "mapName": "山代温泉"}, {"id": "onsen_060", "name": "山中温泉", "pref": "石川県", "mapName": "山中温泉"}, {"id": "onsen_061", "name": "あわら温泉", "pref": "福井県", "mapName": "芦原温泉"}, {"id": "onsen_062", "name": "下呂温泉", "pref": "岐阜県", "mapName": "下呂温泉"}, {"id": "onsen_063", "name": "奥飛騨温泉郷", "pref": "岐阜県", "mapName": "奥飛騨温泉郷 新穂高温泉"}, {"id": "onsen_064", "name": "飛騨高山温泉", "pref": "岐阜県", "mapName": "飛騨高山温泉 ひだホテルプラザ"}, {"id": "onsen_065", "name": "長良川温泉", "pref": "岐阜県", "mapName": "長良川温泉"}, {"id": "onsen_066", "name": "熱海温泉", "pref": "静岡県", "mapName": "熱海温泉"}, {"id": "onsen_067", "name": "修善寺温泉", "pref": "静岡県", "mapName": "修善寺温泉"}, {"id": "onsen_068", "name": "稲取温泉", "pref": "静岡県", "mapName": "稲取温泉"}, {"id": "onsen_069", "name": "伊東温泉", "pref": "静岡県", "mapName": "伊東温泉"}, {"id": "onsen_070", "name": "観音温泉", "pref": "静岡県", "mapName": "観音温泉"}, {"id": "onsen_071", "name": "下田温泉", "pref": "静岡県", "mapName": "下田温泉"}, {"id": "onsen_072", "name": "浜名湖かんざんじ温泉", "pref": "静岡県", "mapName": "舘山寺温泉"}, {"id": "onsen_073", "name": "鳥羽温泉郷", "pref": "三重県", "mapName": "鳥羽本浦温泉"}, {"id": "onsen_074", "name": "長島温泉", "pref": "三重県", "mapName": "長島温泉 湯あみの島"}, {"id": "onsen_075", "name": "おごと温泉", "pref": "滋賀県", "mapName": "雄琴温泉"}, {"id": "onsen_076", "name": "有馬温泉", "pref": "兵庫県", "mapName": "有馬温泉"}, {"id": "onsen_077", "name": "城崎温泉", "pref": "兵庫県", "mapName": "城崎温泉"}, {"id": "onsen_078", "name": "洲本温泉", "pref": "兵庫県", "mapName": "洲本温泉うるおいの湯 足湯"}, {"id": "onsen_079", "name": "湯村温泉", "pref": "兵庫県", "mapName": "湯村温泉"}, {"id": "onsen_080", "name": "白浜温泉", "pref": "和歌山県", "mapName": "南紀白浜温泉"}, {"id": "onsen_081", "name": "南紀勝浦温泉", "pref": "和歌山県", "mapName": "南紀勝浦温泉"}, {"id": "onsen_082", "name": "三朝温泉", "pref": "鳥取県", "mapName": "三朝温泉"}, {"id": "onsen_083", "name": "皆生温泉", "pref": "鳥取県", "mapName": "皆生温泉"}, {"id": "onsen_084", "name": "玉造温泉", "pref": "島根県", "mapName": "玉造温泉"}, {"id": "onsen_085", "name": "長門湯本温泉", "pref": "山口県", "mapName": "長門湯本温泉"}, {"id": "onsen_086", "name": "湯田温泉", "pref": "山口県", "mapName": "湯田温泉"}, {"id": "onsen_087", "name": "祖谷温泉", "pref": "徳島県", "mapName": "和の宿 ホテル祖谷温泉 Hotel Iyaonsen"}, {"id": "onsen_088", "name": "こんぴら温泉郷", "pref": "香川県", "mapName": "こんぴら温泉湯元八千代"}, {"id": "onsen_089", "name": "道後温泉", "pref": "愛媛県", "mapName": "道後温泉本館"}, {"id": "onsen_090", "name": "嬉野温泉", "pref": "佐賀県", "mapName": "嬉野温泉"}, {"id": "onsen_091", "name": "雲仙温泉", "pref": "長崎県", "mapName": "雲仙温泉"}, {"id": "onsen_092", "name": "黒川温泉", "pref": "熊本県", "mapName": "黒川温泉"}, {"id": "onsen_093", "name": "人吉温泉", "pref": "熊本県", "mapName": "人吉温泉 元湯"}, {"id": "onsen_094", "name": "山鹿・平山温泉", "pref": "熊本県", "mapName": "平山温泉 元湯"}, {"id": "onsen_095", "name": "阿蘇温泉郷", "pref": "熊本県", "mapName": "亀の井ホテル 阿蘇"}, {"id": "onsen_096", "name": "別府八湯温泉", "pref": "大分県", "mapName": "別府温泉"}, {"id": "onsen_097", "name": "由布院温泉", "pref": "大分県", "mapName": "別府八湯温泉"}, {"id": "onsen_098", "name": "奥日田温泉", "pref": "大分県", "mapName": "奥日田温泉 うめひびき"}, {"id": "onsen_099", "name": "指宿温泉", "pref": "鹿児島県", "mapName": "指宿温泉"}, {"id": "onsen_100", "name": "霧島温泉", "pref": "鹿児島県", "mapName": "霧島温泉郷（丸尾周辺）"}];
+const $=id=>document.getElementById(id),map=L.map('map',{scrollWheelZoom:true}).setView([36.4,137.7],5);L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',{attribution:'地図：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>',maxZoom:18}).addTo(map);
+let syncing=false,editingId=null,selectedId=null,dirtyIds=new Set(),visits={},db='',markers={},coords={},verified={},bulkStop=false,bulkRunning=false;try{coords=JSON.parse(localStorage.getItem('onsen_coords_v1')||'{}')}catch{};
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function normalize(s){return s.trim().replace(/\/+$/,'')}
+function validUrl(u){try{let x=new URL(u);return x.protocol==='https:'&&/\.firebasedatabase\.app$|\.firebaseio\.com$/.test(x.hostname)}catch{return false}}
+function endpoint(id){return db+'/visits'+(id?'/'+encodeURIComponent(id):'')+'.json'}
+function coordsEndpoint(id){return db+'/coordinates'+(id?'/'+encodeURIComponent(id):'')+'.json'}
+function message(s,error=false){$('connection').textContent=s;$('connection').className='status'+(error?' warn':'')}
+function stats(){let n=PLACES.filter(p=>visits[p.id]===true).length;$('progressbar').style.width=(n/PLACES.length*100)+'%';$('total').textContent=PLACES.length;$('visited').textContent=n;$('rate').textContent=(n/PLACES.length*100).toFixed(0)+'%'}
+function icon(yes,pending=false,highlight=false){return L.divIcon({className:'',html:'<div class="pin '+(pending?'pending':yes?'yes':'')+(highlight?' highlight':'')+'"></div>',iconSize:[20,20],iconAnchor:[10,10]})}
+function visitChoices(id){return '<span class="visit-choice" role="group" aria-label="訪問状況"><button type="button" data-visit="no" data-id="'+id+'" aria-pressed="'+(!visits[id])+'">未</button><button type="button" data-visit="yes" data-id="'+id+'" aria-pressed="'+(!!visits[id])+'">済</button></span>'}
+function popup(p){return '<b>'+safe(p.name)+'</b><div>'+safe(p.pref)+'</div>'+visitChoices(p.id)}
+document.addEventListener('click',e=>{const b=e.target.closest('.leaflet-popup button[data-visit]');if(b)setVisit(b.dataset.id,b.dataset.visit==='yes')});
+function updatePins(){for(const p of PLACES){if(!coords[p.id])continue;if(!markers[p.id]){markers[p.id]=L.marker(coords[p.id],{icon:icon(visits[p.id],false,selectedId===p.id),draggable:false}).addTo(map);markers[p.id].on('dragend',()=>{const ll=markers[p.id].getLatLng();coords[p.id]=[ll.lat,ll.lng];verified[p.id]=false;dirtyIds.add(p.id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();$('status').textContent=p.name+' の位置を変更しました。下の「この位置で確定・共有」を押してください。';})}markers[p.id].dragging[editingId===p.id?'enable':'disable']();markers[p.id].setLatLng(coords[p.id]);markers[p.id].setIcon(icon(visits[p.id],!verified[p.id],selectedId===p.id));markers[p.id].bindPopup(popup(p))}}
+const REGIONS=[['北海道',['北海道']],['東北地方',['青森県','岩手県','宮城県','秋田県','山形県','福島県']],['関東地方',['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']],['中部地方',['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県']],['近畿地方',['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']],['中国地方',['鳥取県','島根県','岡山県','広島県','山口県']],['四国地方',['徳島県','香川県','愛媛県','高知県']],['九州・沖縄地方',['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']]];
+function placeItem(p){return '<div class="item '+(selectedId===p.id?'active':'')+'"><div><button class="place-link" data-select="'+p.id+'">・'+safe(p.name)+'</button>'+'</div><div>'+visitChoices(p.id)+'</div></div>'}
+function render(){stats();let q=$('search').value.toLowerCase().trim(),f=$('filter').value;let found=PLACES.filter(p=>(p.name+' '+p.pref+' '+p.mapName).toLowerCase().includes(q)&&(f==='all'||f==='missing'&&!coords[p.id]||f==='pending'&&coords[p.id]&&!verified[p.id]||(f==='yes'||f==='no')&&((f==='yes')===!!visits[p.id])));let html='';for(const [region,prefs] of REGIONS){let blocks='';for(const pref of prefs){const items=found.filter(p=>p.pref===pref);if(items.length)blocks+='<section class="pref-section"><h3 class="pref-heading">'+safe(pref)+' <small>('+items.length+'件)</small></h3><div class="pref-items">'+items.map(placeItem).join('')+'</div></section>'}if(blocks)html+='<section class="region-section"><h2 class="region-heading">【'+safe(region)+'】</h2>'+blocks+'</section>'}const others=found.filter(p=>!REGIONS.some(r=>r[1].includes(p.pref)));if(others.length)html+='<section class="region-section"><h2 class="region-heading">【その他】</h2><div class="pref-items">'+others.map(placeItem).join('')+'</div></section>';$('list').innerHTML=html||'<p>該当する温泉がありません。</p>';updatePins();updateReview()}
+
+window.setVisit=async function(id,next){if(!db){message('先にFirebaseに接続してください。',true);return}let old=!!visits[id];if(old===next)return;visits[id]=next;render();try{let r=await fetch(endpoint(id),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(next)});if(!r.ok)throw Error('HTTP '+r.status);$('status').textContent='保存しました。ほかの端末にも反映されます。'}catch(e){visits[id]=old;render();$('status').textContent='保存に失敗しました：'+e.message}}
+$('list').addEventListener('click',e=>{let s=e.target.closest('button[data-select]');if(s){focusPlace(s.dataset.select);return}let b=e.target.closest('button[data-id]');if(b&&b.dataset.visit)setVisit(b.dataset.id,b.dataset.visit==='yes')});$('search').addEventListener('input',render);$('filter').addEventListener('change',render);
+async function sync(){if(!db||syncing)return;syncing=true;try{let r=await fetch(endpoint(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);let data=await r.json();visits=data&&typeof data==='object'?data:{};
+ let cr=await fetch(coordsEndpoint(),{cache:'no-store'});if(cr.ok){let shared=await cr.json();if(shared&&typeof shared==='object'){for(let [id,v] of Object.entries(shared)){if(Number.isFinite(v?.lat)&&Number.isFinite(v?.lng)){if(!dirtyIds.has(id)){coords[id]=[v.lat,v.lng];verified[id]=true}}}}}render();message('🟢 共有データに接続中・約60秒ごとに更新')}catch(e){message('接続エラー：FirebaseのURLと読み書きルールを確認してください（'+e.message+'）',true)}finally{syncing=false}}
+$('connect').onclick=()=>{let u=normalize($('dburl').value);if(!validUrl(u)){message('Firebase Realtime Databaseのhttps URLを入力してください。',true);return}db=u;localStorage.setItem('onsen_db_url',db);sync()};$('dburl').value=localStorage.getItem('onsen_db_url')||'https://japan-onsen-map-default-rtdb.firebaseio.com/';if($('dburl').value)$('connect').click();setInterval(()=>{if(!document.hidden)sync()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
+
+function focusPlace(id){
+ const p=PLACES.find(x=>x.id===id);if(!p)return;
+ selectedId=id;
+ $('review-details').open=true;
+ if(coords[id]){
+  map.flyTo(coords[id],Math.max(map.getZoom(),12),{duration:0.6});
+  updatePins();markers[id]?.openPopup();
+  $('status').textContent=p.name+' の位置を地図で強調表示しました。位置を修正するには「位置を修正」を押してください。';
+ }else{
+  $('status').textContent=p.name+' は位置未登録です。位置を検索するか、座標を入力してください。';
+ }
+ render();
+ const el=$('list').querySelector('[data-select="'+id+'"]');el?.closest('.item')?.scrollIntoView({block:'nearest'});
+}
+function updateReview(){
+ const missing=PLACES.filter(p=>!coords[p.id]);
+ $('missing-count').textContent=missing.length+'件';
+ $('missing-list').innerHTML=missing.length?missing.map(p=>`<div class="missing-row"><div><b>${safe(p.name)}</b><small>${safe(p.pref)} · 地点名：${safe(p.mapName)}</small></div><div><button data-missing-select="${p.id}">位置を登録</button><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapName+' '+p.pref)}" target="_blank" rel="noopener">Googleマップ</a></div></div>`).join(''):'<p class="sub">位置未登録の温泉はありません。</p>';
+
+ const pending=PLACES.filter(p=>coords[p.id]&&!verified[p.id]);
+ const confirmed=PLACES.filter(p=>verified[p.id]).length;
+ $('geostats').textContent=`確定 ${confirmed} / 確認中 ${pending.length} / 未登録 ${PLACES.length-confirmed-pending.length}`;
+ const selected=PLACES.find(p=>p.id===selectedId);
+ let editor='';
+ if(selected){
+  const c=coords[selected.id];
+  editor=`<div class="editpanel simple-editor">
+   <div class="simple-head"><b>${safe(selected.name)}</b><span class="simple-state">${verified[selected.id]?'登録済み':c?'位置を確認中':'位置未登録'}</span></div>
+   <div class="simple-help">Googleマップでコピーした座標を貼り付ける、またはピンをドラッグして位置を変更できます。</div>
+   <label class="simple-label" for="coord-${selected.id}">緯度・経度</label>
+   <input id="coord-${selected.id}" data-coord="${selected.id}" type="text" inputmode="text" placeholder="例：38.225338, 140.727050" aria-label="緯度・経度" autocomplete="off">
+   <div class="simple-buttons"><button class="edit-apply" data-paste="${selected.id}">地図に反映</button><button class="primary edit-confirm" data-verify="${selected.id}" ${c?'':'disabled'}>この位置で保存</button></div>
+   <div class="simple-bottom"><button data-edit="${selected.id}">ピンのドラッグを有効にする</button><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.mapName+' '+selected.pref)}">Googleマップで確認</a></div>
+   <div class="simple-feedback" id="coord-feedback">${c?'現在の位置：'+c[0].toFixed(6)+', '+c[1].toFixed(6):'まだ位置は登録されていません。'}</div>
+   </div>`;
+ }
+ $('review').innerHTML=editor || '<p class="sub">右側の温泉名をクリックするか、検索で温泉を選択すると編集欄が表示されます。</p>';
+
+}
+$('missing-list').addEventListener('click',e=>{const b=e.target.closest('button[data-missing-select]');if(!b)return;focusPlace(b.dataset.missingSelect);$('review-details').open=true;});
+$('review').addEventListener('click',async e=>{
+ let b=e.target.closest('button');if(!b)return;let id=b.dataset.focus||b.dataset.verify||b.dataset.retry||b.dataset.apply||b.dataset.edit||b.dataset.paste;if(!id)return;
+ if(b.dataset.edit){
+  editingId=id;selectedId=id;
+  if(coords[id]){map.setView(coords[id],14);updatePins();markers[id]?.openPopup();}
+  render();$('status').textContent='編集モード：ピンをドラッグするか、緯度・経度を入力してください。変更を保存するまでは他の端末に反映されません。';
+  return;
+ }
+ if(b.dataset.paste){
+  const field=$('review').querySelector('[data-coord="'+id+'"]');
+  const raw=(field?.value||'').trim();const parts=raw?raw.split(/[,，\s]+/).filter(Boolean):[$('review').querySelector('[data-lat="'+id+'"]')?.value?.trim(),$('review').querySelector('[data-lng="'+id+'"]')?.value?.trim()];
+  const lat=parts.length===2&&parts[0]!==''?Number(parts[0]):NaN;
+  const lng=parts.length===2&&parts[1]!==''?Number(parts[1]):NaN;
+  if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180){$('status').textContent='入力形式を確認してください。例：38.225338360460704, 140.7270498069927';return}
+  coords[id]=[lat,lng];verified[id]=false;dirtyIds.add(id);
+  localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));
+  selectedId=id;editingId=null;render();map.setView(coords[id],13);updatePins();
+  $('status').textContent='座標を地図に反映しました。位置を確認し「この位置で保存」を押してください。';
+  return;
+ }
+ if(b.dataset.apply){let latText=$('review').querySelector('[data-lat="'+id+'"]').value.trim(),lngText=$('review').querySelector('[data-lng="'+id+'"]').value.trim();let lat=latText===''?NaN:Number(latText),lng=lngText===''?NaN:Number(lngText);if(!Number.isFinite(lat)||!Number.isFinite(lng)||Math.abs(lat)>90||Math.abs(lng)>180){$('status').textContent='緯度・経度が正しくありません';return}coords[id]=[lat,lng];verified[id]=false;dirtyIds.add(id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();map.setView(coords[id],13);$('status').textContent='座標を反映しました。位置を確認して確定・共有してください';return}
+ if(b.dataset.focus){focusPlace(id);return}
+ if(b.dataset.retry){delete coords[id];delete verified[id];localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));if(markers[id]){map.removeLayer(markers[id]);delete markers[id]}render();return}
+ if(!coords[id]){$('status').textContent='先に座標を地図に反映してください。';return}if(!db){$('status').textContent='位置を共有するには先にFirebaseへ接続してください';return}
+ try{let val={lat:coords[id][0],lng:coords[id][1]};let r=await fetch(coordsEndpoint(id),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(val)});if(!r.ok)throw Error('HTTP '+r.status);verified[id]=true;dirtyIds.delete(id);editingId=null;render();$('status').textContent='位置を上書き保存して全員に共有しました。ほかの登録済み地点は変更していません。'}catch(err){$('status').textContent='位置の保存に失敗：'+err.message}
+});
+async function locatePlace(p){
+ let term=p.mapName+' '+p.pref+' 日本';
+ let r=await fetch('https://msearch.gsi.go.jp/address-search/AddressSearch?q='+encodeURIComponent(term));
+ if(!r.ok)throw Error('位置検索 HTTP '+r.status);
+ let results=await r.json();
+ if(!Array.isArray(results)||!results.length)throw Error('候補なし');
+ let x=results.find(x=>String(x.properties?.title||'').includes(p.mapName))||results[0];
+ let c=x.geometry?.coordinates;if(!Array.isArray(c)||c.length<2)throw Error('座標なし');
+ let lat=Number(c[1]),lng=Number(c[0]);if(!(lat>24&&lat<46&&lng>122&&lng<154))throw Error('日本国外の座標');
+ coords[p.id]=[lat,lng];localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();return true;
+}
+let bulkFailures=[];
+$('bulk').onclick=async()=>{
+ if(bulkRunning)return;
+ bulkRunning=true;bulkStop=false;bulkFailures=[];$('bulk').disabled=true;$('stop').disabled=false;
+ const targets=PLACES.filter(p=>!coords[p.id]);let count=0;
+ for(const p of targets){if(bulkStop)break;
+ $('status').textContent=`位置検索 ${count+1}/${targets.length}：${p.name}（検索結果は未確認候補）`;
+ try{await locatePlace(p)}catch(e){bulkFailures.push(p.name+'：'+e.message)}
+ count++;await new Promise(r=>setTimeout(r,1200));
+ }
+ bulkRunning=false;$('bulk').disabled=false;$('stop').disabled=true;
+ $('status').textContent=`検索終了：${count}件を処理、候補なし・失敗 ${bulkFailures.length}件。位置未登録一覧から座標を手動入力できます。`;
+ if(bulkFailures.length)console.info('位置検索未取得',bulkFailures);
+};
+$('stop').onclick=()=>{bulkStop=true;$('status').textContent='停止処理中…'};
+
+let busy=false;$('locate').onclick=async()=>{if(busy)return;let q=$('search').value.toLowerCase().trim(),p=PLACES.find(p=>(p.name+' '+p.pref+' '+p.mapName).toLowerCase().includes(q)&&!coords[p.id]);if(!p){$('status').textContent='検索結果の未取得地点がありません';return}busy=true;$('locate').disabled=true;try{await locatePlace(p);map.setView(coords[p.id],12);markers[p.id].openPopup();$('status').textContent=p.name+' の候補を表示しました。Googleマップで位置を照合してください。'}catch(e){$('status').textContent='検索失敗：'+e.message}finally{busy=false;$('locate').disabled=false}};
+render();</script></body></html>
