@@ -100,31 +100,285 @@ header .sub{color:#c8e1d6}
 #review-details{padding:8px!important}
 #review-details summary{font-size:13px}
 @media(min-width:900px){.map-dock{overflow-y:auto}.simple-editor{padding:10px!important}}
-.connection-footer{margin:22px 0 8px}.connection-footer .settings{background:#fff;border:1px solid #dce8e1;border-radius:12px;padding:12px 16px}.connection-footer .settings .toolbar{max-width:750px}.pref-fold{border:1px solid #dce8e1;border-radius:10px;background:#fff;overflow:hidden;margin:9px 0}.pref-fold>.pref-heading{display:list-item;list-style:disclosure-closed inside;cursor:pointer;margin:0;padding:11px 13px;border:0;font-size:16px;user-select:none}.pref-fold[open]>.pref-heading{list-style:disclosure-open inside;border-bottom:1px solid #e3ede7;background:#f2f8f4}.pref-fold>.pref-items{padding:10px}.pref-fold summary:hover{background:#edf5ef}.pref-fold summary::marker{color:#187d5b}.region-fold{margin:14px 0 18px;border:1px solid #cbded3;border-radius:12px;overflow:hidden;background:#f7faf8}.region-fold>.region-heading{display:list-item;list-style:disclosure-closed inside;cursor:pointer;margin:0;border:0;padding:12px 15px;background:#e2efe8;font-size:18px}.region-fold[open]>.region-heading{list-style:disclosure-open inside;border-bottom:1px solid #cbded3}.region-fold>.region-content{padding:4px 12px 12px}.region-fold summary::marker{color:#187d5b}.page-menu{display:flex;gap:8px;margin-top:12px}.page-tab{background:#f2f7f4;border:1px solid #c7d9cf;color:#31594a;padding:9px 17px;font-weight:650}.page-tab.active{background:#187d5b;border-color:#187d5b;color:white}.second-page{min-height:50vh;padding:28px;background:white;border-radius:14px}.second-page h2{margin-top:0}[hidden]{display:none!important}.stamp-page{padding:0 0 35px}.stamp-hero{background:linear-gradient(120deg,#e5f1e9,#fff3e7);border:1px solid #d6e6da;border-radius:16px;padding:28px 30px;margin-bottom:15px}.stamp-eyebrow{font-size:11px;letter-spacing:2px;color:#678e78;font-weight:700}.stamp-hero h2{font-size:27px;margin:10px 0;color:#265442}.stamp-hero p{margin:0;color:#647b70}.stamp-summary{display:flex;gap:12px;margin-bottom:12px}.stamp-summary>div{flex:1;background:white;border:1px solid #dfe9e2;border-radius:13px;padding:14px 20px}.stamp-summary small{display:block;color:#688074}.stamp-summary strong{font-size:30px;color:#c24d49}.stamp-summary span{color:#74867a}.stamp-help{color:#66786f;font-size:13px;margin:12px 0 18px}.stamp-region{border:1px solid #d9e5dc;border-radius:14px;background:#fff;margin:12px 0;overflow:hidden}.stamp-region>summary{padding:15px 18px;cursor:pointer;font-weight:750;font-size:18px;background:#eff6f1;color:#315c49}.stamp-region-body{padding:14px}.stamp-pref{border:1px solid #e7e4db;border-radius:12px;margin:10px 0;overflow:hidden}.stamp-pref>summary{padding:12px 15px;cursor:pointer;background:#fbf8f1;font-weight:700;color:#4e5148}.stamp-pref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;padding:13px}.stamp-tile{min-height:139px;border:1px solid #e5e5df;border-radius:12px;background:#fffdfa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:12px 8px}.stamp-seal{width:67px;height:67px;border:3px double #d9d4cd;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg);color:#c8c5bf;position:relative;font-weight:800;letter-spacing:2px}.stamp-seal:before{content:'♨';position:absolute;top:5px;font-size:23px;letter-spacing:0}.stamp-seal span{padding-top:22px;font-size:13px}.stamp-tile.done .stamp-seal{border-color:#bf4948;color:#bf4948;background:#fff0ec;box-shadow:0 0 0 3px #fff inset}.stamp-tile.done{background:#fff8f4;border-color:#edc7bc}.stamp-name{font-size:12px;font-weight:650;color:#3d5145;overflow-wrap:anywhere}.stamp-count{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap;margin-left:8px;vertical-align:middle}.stamp-mini{font-size:15px;color:#c7c5c0}.stamp-mini.done{color:#c34e4c}@media(max-width:650px){.stamp-hero{padding:20px}.stamp-hero h2{font-size:22px}.stamp-pref-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}.stamp-summary strong{font-size:25px}}@media(max-width:800px){.simple-editor input[data-coord]{font-size:16px!important;width:100%;min-height:46px}.simple-buttons button,.simple-bottom button{min-height:44px;touch-action:manipulation}.reviewpanel{scroll-margin-top:16px}#map{touch-action:pan-x pan-y}} html{scroll-padding-top:115px} .stamp-region,.stamp-pref{scroll-margin-top:115px}@media(max-width:650px){header{padding:9px 13px}.page-menu{margin-top:7px}.page-tab{padding:7px 11px}.map-dock{top:95px;max-height:calc(100vh - 105px)}} </style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1><nav class="page-menu" aria-label="ページ切り替え"><button type="button" class="page-tab active" data-page="map" aria-current="page">🗺️ 温泉マップ</button><button type="button" class="page-tab" data-page="second">♨️ スタンプカード</button></nav></div></header><main class="wrap"><div id="page-map"><div class="workspace">
+.connection-footer{margin:22px 0 8px}.connection-footer .settings{background:#fff;border:1px solid #dce8e1;border-radius:12px;padding:12px 16px}.connection-footer .settings .toolbar{max-width:750px}.pref-fold{border:1px solid #dce8e1;border-radius:10px;background:#fff;overflow:hidden;margin:9px 0}.pref-fold>.pref-heading{display:list-item;list-style:disclosure-closed inside;cursor:pointer;margin:0;padding:11px 13px;border:0;font-size:16px;user-select:none}.pref-fold[open]>.pref-heading{list-style:disclosure-open inside;border-bottom:1px solid #e3ede7;background:#f2f8f4}.pref-fold>.pref-items{padding:10px}.pref-fold summary:hover{background:#edf5ef}.pref-fold summary::marker{color:#187d5b}.region-fold{margin:14px 0 18px;border:1px solid #cbded3;border-radius:12px;overflow:hidden;background:#f7faf8}.region-fold>.region-heading{display:list-item;list-style:disclosure-closed inside;cursor:pointer;margin:0;border:0;padding:12px 15px;background:#e2efe8;font-size:18px}.region-fold[open]>.region-heading{list-style:disclosure-open inside;border-bottom:1px solid #cbded3}.region-fold>.region-content{padding:4px 12px 12px}.region-fold summary::marker{color:#187d5b}.page-menu{display:flex;gap:8px;margin-top:12px}.page-tab{background:#f2f7f4;border:1px solid #c7d9cf;color:#31594a;padding:9px 17px;font-weight:650}.page-tab.active{background:#187d5b;border-color:#187d5b;color:white}.second-page{min-height:50vh;padding:28px;background:white;border-radius:14px}.second-page h2{margin-top:0}[hidden]{display:none!important}.stamp-page{padding:0 0 35px}.stamp-hero{background:linear-gradient(120deg,#e5f1e9,#fff3e7);border:1px solid #d6e6da;border-radius:16px;padding:28px 30px;margin-bottom:15px}.stamp-eyebrow{font-size:11px;letter-spacing:2px;color:#678e78;font-weight:700}.stamp-hero h2{font-size:27px;margin:10px 0;color:#265442}.stamp-hero p{margin:0;color:#647b70}.stamp-summary{display:flex;gap:12px;margin-bottom:12px}.stamp-summary>div{flex:1;background:white;border:1px solid #dfe9e2;border-radius:13px;padding:14px 20px}.stamp-summary small{display:block;color:#688074}.stamp-summary strong{font-size:30px;color:#c24d49}.stamp-summary span{color:#74867a}.stamp-help{color:#66786f;font-size:13px;margin:12px 0 18px}.stamp-region{border:1px solid #d9e5dc;border-radius:14px;background:#fff;margin:12px 0;overflow:hidden}.stamp-region>summary{padding:15px 18px;cursor:pointer;font-weight:750;font-size:18px;background:#eff6f1;color:#315c49}.stamp-region-body{padding:14px}.stamp-pref{border:1px solid #e7e4db;border-radius:12px;margin:10px 0;overflow:hidden}.stamp-pref>summary{padding:12px 15px;cursor:pointer;background:#fbf8f1;font-weight:700;color:#4e5148}.stamp-pref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px;padding:13px}.stamp-tile{min-height:139px;border:1px solid #e5e5df;border-radius:12px;background:#fffdfa;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:12px 8px}.stamp-seal{width:67px;height:67px;border:3px double #d9d4cd;border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-12deg);color:#c8c5bf;position:relative;font-weight:800;letter-spacing:2px}.stamp-seal:before{content:'♨';position:absolute;top:5px;font-size:23px;letter-spacing:0}.stamp-seal span{padding-top:22px;font-size:13px}.stamp-tile.done .stamp-seal{border-color:#bf4948;color:#bf4948;background:#fff0ec;box-shadow:0 0 0 3px #fff inset}.stamp-tile.done{background:#fff8f4;border-color:#edc7bc}.stamp-name{font-size:12px;font-weight:650;color:#3d5145;overflow-wrap:anywhere}.stamp-count{display:inline-flex;gap:4px;align-items:center;flex-wrap:wrap;margin-left:8px;vertical-align:middle}.stamp-mini{font-size:15px;color:#c7c5c0}.stamp-mini.done{color:#c34e4c}@media(max-width:650px){.stamp-hero{padding:20px}.stamp-hero h2{font-size:22px}.stamp-pref-grid{grid-template-columns:repeat(auto-fill,minmax(105px,1fr))}.stamp-summary strong{font-size:25px}}@media(max-width:800px){.simple-editor input[data-coord]{font-size:16px!important;width:100%;min-height:46px}.simple-buttons button,.simple-bottom button{min-height:44px;touch-action:manipulation}.reviewpanel{scroll-margin-top:16px}#map{touch-action:pan-x pan-y}} html{scroll-padding-top:115px} .stamp-region,.stamp-pref{scroll-margin-top:115px}@media(max-width:650px){header{padding:9px 13px}.page-menu{margin-top:7px}.page-tab{padding:7px 11px}.map-dock{top:95px;max-height:calc(100vh - 105px)}} 
+/* Stamp book: decorative, responsive illustrations, no external assets */
+.stamp-hero{position:relative;overflow:hidden;min-height:170px;background:linear-gradient(115deg,#e6f4ed 0%,#f8f7eb 55%,#fff0e4 100%);padding:32px 35px}
+.stamp-hero:before{content:'✿  ✿  ✿';position:absolute;right:22px;top:15px;font-size:22px;letter-spacing:20px;color:#f3acb3;opacity:.75;transform:rotate(-12deg)}
+.stamp-hero:after{content:'';position:absolute;right:-35px;bottom:-78px;width:300px;height:150px;background:#b7d5c2;border-radius:55% 55% 0 0;box-shadow:-115px 32px 0 8px #d2e5d4;opacity:.7}
+.stamp-hero .stamp-eyebrow,.stamp-hero h2,.stamp-hero p{position:relative;z-index:2;max-width:70%}
+.stamp-scenery{position:absolute;right:55px;bottom:19px;z-index:3;display:flex;align-items:end;gap:7px;font-size:35px;transform:rotate(-3deg);filter:drop-shadow(0 3px 2px #759a7a33)}
+.stamp-scenery span:nth-child(2){font-size:66px}.stamp-scenery span:nth-child(3){font-size:28px}.stamp-scenery span:nth-child(4){font-size:41px}
+.hero-sparkle{color:#e8a5ad;font-size:25px}.stamp-region>summary:before{content:'🌿';margin-right:8px}.stamp-pref>summary:before{content:'✿';color:#a84b48;margin-right:7px}
+.stamp-tile{background:radial-gradient(circle at 90% 8%,#fff1e5 0 13px,transparent 14px),#fffdfa;transition:background .15s}.stamp-tile.done{background:radial-gradient(circle at 90% 8%,#ffe5e1 0 13px,transparent 14px),#fff8f4}
+@media(max-width:650px){.stamp-hero{padding:24px 18px;min-height:175px}.stamp-hero .stamp-eyebrow,.stamp-hero h2,.stamp-hero p{max-width:76%}.stamp-scenery{right:8px;bottom:12px;gap:0;font-size:20px}.stamp-scenery span:nth-child(2){font-size:43px}.stamp-scenery span:nth-child(3){font-size:18px}.stamp-scenery span:nth-child(4){font-size:25px}.stamp-hero:after{width:175px;height:95px;bottom:-48px}}
+
+:root{font-family:'Yu Gothic','Hiragino Kaku Gothic ProN',system-ui,sans-serif;color:#354e3c;background:#f5f1e5}
+body{background:radial-gradient(ellipse at 10% 25%,#dcebcf 0,transparent 35%),radial-gradient(ellipse at 85% 70%,#f8e8c9 0,transparent 40%),#f6f1e6}
+header{background:linear-gradient(105deg,#254d3c,#38694d 70%,#527c59)!important;border-bottom:5px solid #c6a979;box-shadow:0 5px 18px #344e3c25!important}
+header h1{font-family:'Yu Mincho','Hiragino Mincho ProN',serif;letter-spacing:.06em}
+.page-tab{border-radius:22px 22px 8px 8px!important}
+.map-dock,.list-area,.settings,.dashboard{border-color:#d4dcc8!important}
+.map-dock,.list-area{background:#fcfaf2!important;box-shadow:0 7px 24px #6a795d18!important}
+#map{border:5px solid #fdf8eb;border-radius:18px!important;box-shadow:0 3px 14px #58705825}
+.list-title h2,.stamp-hero h2{font-family:'Yu Mincho','Hiragino Mincho ProN',serif}
+.region-fold,.pref-fold,.stamp-region,.stamp-pref{border-radius:15px!important;border-color:#d7dec8!important}
+.region-fold>summary,.stamp-region>summary{background:linear-gradient(90deg,#dce9cf,#f0f1d9)!important;color:#365a40!important}
+.pref-fold>summary,.stamp-pref>summary{background:#faf3e4!important;color:#615d40!important}
+.item,.stamp-tile{background:#fffdf5!important;border:1px solid #e4dcc9!important;box-shadow:0 2px 8px #7d775417}
+.item:hover,.stamp-tile:hover{background:#f5f7e9!important}
+button,.page-tab{transition:background .18s,transform .18s}
+button:hover{filter:brightness(.97)}
+button:active{transform:translateY(1px)}
+.primary{background:#527e60!important;border-color:#527e60!important}
+.stamp-page{position:relative}
+.stamp-hero{background:radial-gradient(circle at 85% 10%,#fff8d9 0 11%,transparent 12%),linear-gradient(120deg,#dcead4,#f9edd9 65%,#f8e1d5)!important;border:2px solid #e3d5b9!important;box-shadow:0 5px 20px #5c6e5420;overflow:hidden}
+.stamp-hero:before{content:'☁  ☁';position:absolute;left:42%;top:14%;font-size:28px;color:#ffffffb5;letter-spacing:34px;pointer-events:none}
+.stamp-hero:after{content:'🌲  🌳  🌲';position:absolute;right:17%;bottom:3px;font-size:30px;opacity:.72;pointer-events:none}
+.stamp-scenery{z-index:1}
+.stamp-summary>div{background:#fffaf0!important;border:1px solid #e3dac4!important}
+.stamp-seal{border-style:double}
+#search:focus{outline:3px solid #b3cda9;outline-offset:1px}
+@media(max-width:650px){.stamp-hero:after{right:15%;font-size:18px}.stamp-hero:before{font-size:15px;letter-spacing:12px}}
+.map-topline{justify-content:flex-end!important}.list-area>.grid{margin-top:0}.stamp-summary{margin-top:4px}
+/* 湯屋の旅手帳 — original Japanese bathhouse-inspired visual theme */
+:root{--ink:#433026;--accent:#9d4136;--cream:#f7e9c9;--line:#c9a678;--paper:#fff3d9;color:#433026;background:#efe2c8;font-family:'Yu Mincho','Hiragino Mincho ProN','Noto Serif JP',serif}
+body{color:#433026;background:radial-gradient(circle at 22% 19%,#fff5d9 0,transparent 35%),radial-gradient(circle at 84% 71%,#f0cda8 0,transparent 40%),repeating-linear-gradient(90deg,#f2e4c9 0,#f2e4c9 3px,#efe0c4 4px,#f2e4c9 7px)}
+header{background:linear-gradient(90deg,#1d3330e8,#213a37df),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201200%20220%22%20preserveAspectRatio%3D%22xMidYMid%20slice%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22sky%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23152d36%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%2335504a%22%2F%3E%3C%2FlinearGradient%3E%3ClinearGradient%20id%3D%22house%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%2370513c%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23352a27%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%221200%22%20height%3D%22220%22%20fill%3D%22url%28%23sky%29%22%2F%3E%3Ccircle%20cx%3D%22960%22%20cy%3D%2246%22%20r%3D%2227%22%20fill%3D%22%23f7d89b%22%20opacity%3D%22.65%22%2F%3E%3Cpath%20d%3D%22M0%20165Q100%2098%20210%20158T440%20146T680%20160T950%20143T1200%20166V220H0%22%20fill%3D%22%231b3937%22%2F%3E%3Cpath%20d%3D%22M0%20182Q120%20140%20230%20180T520%20180T850%20175T1200%20180V220H0%22%20fill%3D%22%2315312f%22%2F%3E%3Cg%20fill%3D%22url%28%23house%29%22%20stroke%3D%22%23241f20%22%20stroke-width%3D%225%22%3E%3Crect%20x%3D%2288%22%20y%3D%2283%22%20width%3D%22142%22%20height%3D%22105%22%2F%3E%3Crect%20x%3D%22270%22%20y%3D%22107%22%20width%3D%22135%22%20height%3D%2282%22%2F%3E%3Crect%20x%3D%221030%22%20y%3D%2287%22%20width%3D%22142%22%20height%3D%22106%22%2F%3E%3Crect%20x%3D%22835%22%20y%3D%22112%22%20width%3D%22145%22%20height%3D%2285%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%233b2927%22%3E%3Cpath%20d%3D%22M65%2087L160%2038L256%2087Z%22%2F%3E%3Cpath%20d%3D%22M247%20109L338%2062L426%20109Z%22%2F%3E%3Cpath%20d%3D%22M1007%2088L1100%2038L1195%2088Z%22%2F%3E%3Cpath%20d%3D%22M815%20114L905%2068L997%20114Z%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23f3b46a%22%20opacity%3D%22.8%22%3E%3Crect%20x%3D%22113%22%20y%3D%22106%22%20width%3D%2222%22%20height%3D%2230%22%2F%3E%3Crect%20x%3D%22157%22%20y%3D%22106%22%20width%3D%2222%22%20height%3D%2230%22%2F%3E%3Crect%20x%3D%22296%22%20y%3D%22126%22%20width%3D%2222%22%20height%3D%2227%22%2F%3E%3Crect%20x%3D%22350%22%20y%3D%22126%22%20width%3D%2222%22%20height%3D%2227%22%2F%3E%3Crect%20x%3D%221063%22%20y%3D%22108%22%20width%3D%2222%22%20height%3D%2230%22%2F%3E%3Crect%20x%3D%221108%22%20y%3D%22108%22%20width%3D%2222%22%20height%3D%2230%22%2F%3E%3Crect%20x%3D%22867%22%20y%3D%22132%22%20width%3D%2222%22%20height%3D%2225%22%2F%3E%3Crect%20x%3D%22918%22%20y%3D%22132%22%20width%3D%2222%22%20height%3D%2225%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23d1a77d%22%20stroke-width%3D%223%22%20fill%3D%22none%22%20opacity%3D%22.75%22%3E%3Cpath%20d%3D%22M0%20196Q240%20173%20470%20199T950%20193T1200%20198%22%2F%3E%3Cpath%20d%3D%22M0%20205Q240%20182%20470%20208T950%20202T1200%20207%22%2F%3E%3C%2Fg%3E%3Cg%20fill%3D%22%23dd774c%22%20stroke%3D%22%23f2b47d%22%20stroke-width%3D%222%22%3E%3Cellipse%20cx%3D%22457%22%20cy%3D%2299%22%20rx%3D%2212%22%20ry%3D%2218%22%2F%3E%3Cellipse%20cx%3D%22492%22%20cy%3D%22104%22%20rx%3D%2211%22%20ry%3D%2216%22%2F%3E%3Cellipse%20cx%3D%22725%22%20cy%3D%22101%22%20rx%3D%2212%22%20ry%3D%2218%22%2F%3E%3Cellipse%20cx%3D%22756%22%20cy%3D%22108%22%20rx%3D%2211%22%20ry%3D%2216%22%2F%3E%3C%2Fg%3E%3Cg%20stroke%3D%22%23e6bb79%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M457%2078v-10m35%2020V77m233%205V70m31%2021V80%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E") center 50%/cover!important;border-bottom:6px solid #a56d44;box-shadow:0 5px 0 #5c3928,0 10px 24px #39271c55!important;padding:11px 22px 13px!important}
+header h1{color:#ffe5ac;font-family:'Yu Mincho','Hiragino Mincho ProN',serif;font-size:23px;text-shadow:1px 2px 2px #22170e;letter-spacing:.08em}
+.page-menu{gap:10px}.page-tab{background:linear-gradient(#f8e5be,#e4bf83)!important;border:2px solid #7e4a2c!important;color:#573520!important;border-radius:9px!important;box-shadow:inset 0 1px #fff9,0 3px 0 #553a28;font-family:inherit;font-weight:800}.page-tab.active{background:linear-gradient(#a64e3f,#7d302b)!important;color:#fff1cf!important;border-color:#e4ae6d!important}
+.wrap{max-width:1550px;padding-top:18px}
+.map-dock,.list-area{background:linear-gradient(140deg,#f9edce,#f7e4bf)!important;border:7px solid #815438!important;outline:2px solid #c89d62;outline-offset:-11px;border-radius:17px!important;box-shadow:0 12px 24px #3b291e3b,inset 0 0 0 2px #eac995!important;padding:15px!important}
+#map{border:4px solid #ead3a8!important;border-radius:9px!important;box-shadow:inset 0 0 0 3px #8b5a3b,0 3px 10px #49332333!important}
+.dashboard{padding:12px 2px 0}.stat{background:linear-gradient(#fff8e9,#f5dfb9)!important;border:1px solid #cfb181!important;border-radius:8px!important;box-shadow:0 2px 5px #68492c15!important}.stat small{color:#76573b}.stat b{color:#823e31}.stat span{color:#947c5d}
+.progress{background:#e6cba0}.progress #progressbar{background:linear-gradient(90deg,#d8ad68,#b45645)!important}
+button,input,select{font-family:inherit;border-color:#c9aa7a;border-radius:7px;color:#513928;background:#fff8e9}input:focus,select:focus{outline:2px solid #bc8a57;outline-offset:1px}.primary{background:#884238!important;border-color:#75342b!important;color:#fff5dc!important}.toolbar button:not(.primary){background:#ead3a8}
+.status,.note,.sub{color:#765c45}.reviewpanel,.settings{background:#fff0d1!important;border:1px solid #c7a77a!important;border-radius:9px!important}.reviewpanel summary{color:#754432}.editpanel{background:#fff6e3;border-color:#cda97c}.review{background:#fff2d2}
+.region-fold,.pref-fold{border:1px solid #b98e5f!important;background:#fff5dd!important;border-radius:8px!important;box-shadow:0 3px 0 #d7b58b33}.region-fold>.region-heading{background:linear-gradient(90deg,#9d6941,#c49159)!important;color:#fff3d5!important;border-left:0!important;text-shadow:0 1px #5c3929;font-size:18px;font-weight:800;border-radius:0}.region-fold>.region-heading::marker{color:#ffe2a8}.region-fold>.region-content{padding:6px 10px 12px}.pref-fold>.pref-heading{background:linear-gradient(90deg,#e5c38e,#f4dfb8)!important;color:#603d2a!important;border-bottom:1px solid #c39a65!important;border-radius:0;font-weight:800}.pref-fold summary::marker{color:#8d4936}.pref-fold>.pref-items{padding:10px}
+.item{background:#fffbf0!important;border:1px solid #e1c89f!important;border-radius:7px!important;box-shadow:0 1px 3px #674b2e18!important}.item.active{background:#ffe6bb!important;outline-color:#b77d46}.item strong,.place-link{color:#503528}.place-link:hover{color:#a44235}.item small{color:#886b4c}
+.visit-choice button{border-radius:6px!important}.visit-choice button[data-visit="yes"][aria-pressed="true"]{background:#a53e37!important;border-color:#a53e37!important}.visit-choice button[data-visit="no"][aria-pressed="true"]{background:#4f8060!important;border-color:#4f8060!important}
+#missing-details{margin-top:18px}.connection-footer .settings{background:#fff1d5!important;border:2px solid #c4a273!important}
+.stamp-page{background:linear-gradient(110deg,#fff4d9,#f5e1b9);border:10px solid #845639;border-radius:14px;box-shadow:0 12px 28px #4b2b1b38,inset 0 0 0 3px #d6ae74;padding:22px!important;position:relative}
+.stamp-page:before{content:'✿';position:absolute;right:30px;top:17px;color:#bc6c60;font-size:30px;opacity:.7;pointer-events:none}
+.stamp-page:after{content:'♨';position:absolute;right:70px;top:20px;color:#b67b4b;font-size:24px;opacity:.55;pointer-events:none}
+.stamp-summary{margin:0 0 15px!important;max-width:420px}.stamp-summary>div{background:linear-gradient(90deg,#fff4dc,#f4d9ad)!important;border:2px solid #cda36f!important;box-shadow:0 3px 0 #cba87555;border-radius:7px!important}.stamp-summary small{font-size:13px;color:#79543d}.stamp-summary strong{color:#a53e36;font-size:35px}.stamp-summary span{color:#87664a}
+.stamp-region{background:transparent!important;border:0!important;border-radius:0!important;margin:14px 0!important;overflow:visible!important}
+.stamp-region>summary{background:linear-gradient(90deg,#8f513a,#a9754b)!important;border:2px solid #e6bd80;border-radius:7px!important;color:#fff2d2!important;text-shadow:0 1px #623a2b;box-shadow:0 3px 0 #69442f!important;font-size:19px!important;letter-spacing:.06em}
+.stamp-region-body{padding:7px 3px!important}
+.stamp-pref{background:#fff1d3!important;border:2px solid #c69e68!important;border-radius:9px!important;margin:12px 0!important;box-shadow:inset 0 0 0 2px #fff7e7}
+.stamp-pref>summary{background:linear-gradient(#f4dbac,#e7c18b)!important;border-bottom:1px solid #d0aa72;color:#5a3b2c!important;font-size:17px;padding:12px 15px!important}
+.stamp-pref-grid{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:12px;padding:14px!important}
+.stamp-tile{background:linear-gradient(155deg,#fff9e9,#f8e8c8)!important;border:2px solid #d4b489!important;border-radius:7px!important;min-height:164px;box-shadow:inset 0 0 0 2px #fff9e6,0 2px 3px #8c61301c!important;gap:12px!important}
+.stamp-tile.done{background:linear-gradient(150deg,#fff5df,#f7ddc2)!important;border-color:#c9896b!important}
+.stamp-seal{width:83px;height:83px;border:5px double #b7a18a!important;color:#a9957d!important;background:#f7e9cf66!important;box-shadow:inset 0 0 0 3px #fdf5e6!important;transform:rotate(-9deg)}
+.stamp-seal:before{font-size:31px!important;top:8px!important}.stamp-seal span{padding-top:28px!important;font-size:13px!important;letter-spacing:1px}
+.stamp-tile.done .stamp-seal{border-color:#ad3f36!important;color:#a33a33!important;background:#fff1dc!important;box-shadow:inset 0 0 0 3px #fff7e6,0 0 0 1px #a33a3355!important}
+.stamp-name{color:#5d3e2b!important;font-size:13px!important;font-weight:800!important}.stamp-mini{color:#b7a58e!important}.stamp-mini.done{color:#a33e35!important}
+@media(max-width:899px){.map-dock,.list-area{border-width:5px;padding:9px!important}.stamp-page{border-width:6px;padding:12px!important}.stamp-pref-grid{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}.stamp-tile{min-height:145px}.stamp-seal{width:69px;height:69px}.stamp-seal:before{font-size:24px!important}.stamp-seal span{font-size:11px!important;padding-top:22px!important}}
+@media(max-width:600px){header h1{font-size:18px}.page-tab{font-size:12px;padding:7px 9px}.stamp-region>summary{font-size:16px!important}.stamp-pref>summary{font-size:15px!important}.stamp-pref-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr))}.stamp-tile{min-height:133px}.stamp-name{font-size:11px!important}}
+
+/* 湯屋の旅手帳・仕上げ：スタンプの文字化け対策と和風の装飾 */
+.stamp-count{
+ display:inline-flex!important;vertical-align:middle;align-items:center;
+ flex-wrap:wrap;gap:5px!important;margin-left:10px!important;
+ max-width:100%;background:transparent!important;
+}
+.stamp-mini,.stamp-mini.done{
+ display:inline-block!important;flex:0 0 16px;width:16px;height:16px;
+ min-width:16px;min-height:16px;padding:0!important;margin:0!important;
+ border-radius:50%!important;box-sizing:border-box;
+ border:2px solid #a99b83!important;background:rgba(255,248,231,.45)!important;
+ box-shadow:inset 0 0 0 2px #f5e7cc!important;
+ font-size:0!important;line-height:0!important;
+ text-decoration:none!important;vertical-align:middle;
+}
+.stamp-mini.done{
+ border-color:#a63d36!important;background:#bd4d40!important;
+ box-shadow:inset 0 0 0 2px #fbe7c7!important;
+}
+.stamp-pref>summary,.stamp-region>summary{
+ line-height:1.65;overflow-wrap:anywhere;
+}
+.stamp-pref>summary::marker,.stamp-region>summary::marker{color:#754b31}
+.stamp-pref>summary{display:list-item!important;list-style-position:inside}
+.stamp-pref>summary .stamp-count{margin-top:3px}
+.stamp-page{
+ background:
+ radial-gradient(ellipse at 88% 9%,rgba(236,176,119,.24),transparent 24%),
+ repeating-linear-gradient(0deg,transparent 0,transparent 31px,rgba(128,83,49,.025) 32px),
+ linear-gradient(115deg,#fff4d9,#f3dfb8)!important;
+}
+.stamp-page:before{
+ content:'❀'!important;right:26px;top:18px;
+ color:#b75d58!important;font-size:34px!important;opacity:.68;
+}
+.stamp-page:after{
+ content:'♨'!important;right:76px;top:20px;
+ color:#a66b48!important;font-size:27px!important;opacity:.58;
+}
+.stamp-tile{position:relative}
+.stamp-tile:before{
+ content:'';position:absolute;top:5px;left:6px;right:6px;height:3px;
+ background:linear-gradient(90deg,transparent,#bc9560,transparent);opacity:.55;
+}
+.stamp-tile.done .stamp-seal{transform:rotate(-9deg)}
+.stamp-region>summary{background:linear-gradient(90deg,#754535,#99593f,#ad7149)!important}
+.stamp-pref>summary{background:linear-gradient(90deg,#f3dfb8,#e7c18b)!important}
+.page-tab.active{background:linear-gradient(#a6463d,#7b342d)!important;color:#fff0d4!important}
+.region-fold>.region-heading{background:linear-gradient(90deg,#815039,#ac7650)!important}
+header{
+ background-color:#243a36!important;
+ border-bottom:5px solid #bc8a53!important;
+}
+@media(max-width:650px){
+ .stamp-mini,.stamp-mini.done{flex-basis:13px;width:13px;height:13px;min-width:13px;min-height:13px}
+ .stamp-count{gap:4px!important;margin-left:6px!important}
+}
+
+/* 添付の湯めぐり帳に合わせた和紙と版画のスタンプ */
+#page-second{background:radial-gradient(ellipse at 50% 10%,#f4dec0,#604633 115%);padding:10px 0 40px}
+#page-second .stamp-page{max-width:900px;margin:0 auto;padding:25px 28px 35px!important;background:repeating-linear-gradient(5deg,transparent 0 12px,#885f3411 13px,transparent 14px),linear-gradient(90deg,#dcb98b,#f6e4bd 4%,#f4dfb8 96%,#d9b58a)!important;border:12px ridge #795039!important;box-shadow:inset 0 0 0 2px #b7864f,0 10px 35px #28180d66!important}
+#page-second .stamp-page:before{content:'✿';font-size:37px;top:35px;right:38px;color:#bc6961;opacity:.65}
+#page-second .stamp-page:after{content:'湯めぐり帳';writing-mode:vertical-rl;position:absolute;right:8px;top:160px;font-size:20px;font-weight:800;letter-spacing:.25em;color:#6c3e29;opacity:.45}
+#page-second .stamp-summary{max-width:none;margin:0 0 19px!important}
+#page-second .stamp-summary>div{background:linear-gradient(90deg,#f7e5c4,#e9c99a)!important;border:1px solid #a87747!important;border-radius:2px!important;display:flex;align-items:baseline;gap:10px;padding:10px 16px}
+#page-second .stamp-summary strong{font-size:29px;color:#a63c34}
+#page-second .stamp-region{margin:10px 0 17px!important}
+#page-second .stamp-region>summary{background:linear-gradient(#92513d,#713b31)!important;border:1px solid #663727!important;border-radius:4px!important;color:#fff1d3!important;padding:10px 15px!important;box-shadow:0 2px 0 #c69a64!important}
+#page-second .stamp-region-body{padding:10px 0!important}
+#page-second .stamp-pref{background:transparent!important;border:0!important;box-shadow:none!important;margin:10px 0 19px!important}
+#page-second .stamp-pref>summary{background:transparent!important;border:0!important;border-bottom:1px solid #b78b60!important;color:#5c3927!important;font-size:20px!important;padding:8px 5px 9px!important;font-family:'Yu Mincho','Hiragino Mincho ProN',serif}
+#page-second .stamp-pref>summary:before{content:'❀';font-size:22px;color:#bd6b6b;margin-right:9px}
+#page-second .stamp-pref-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:10px!important;padding:13px 2px!important}
+#page-second .stamp-tile{min-height:155px!important;background:linear-gradient(145deg,#f8e7c8,#f0d7ae)!important;border:1px solid #b98a5c!important;border-radius:3px!important;box-shadow:inset 0 0 0 3px #f9e8c9,0 1px 3px #72503155!important;padding:13px 6px 10px!important;gap:6px!important}
+#page-second .stamp-tile:before{display:none}
+#page-second .stamp-tile.done{border-color:#b8664d!important}
+#page-second .stamp-seal{width:99px!important;height:99px!important;border:0!important;background:none!important;box-shadow:none!important;transform:rotate(-7deg);color:#978977!important}
+#page-second .stamp-tile.done .stamp-seal{color:#b83c35!important;background:none!important;box-shadow:none!important;transform:rotate(-9deg)}
+#page-second .stamp-seal:before{display:none!important}
+#page-second .stamp-landscape{width:100%;height:100%;display:block;fill:none;stroke:currentColor;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+#page-second .stamp-name{font-size:12px!important;color:#523523!important;font-weight:700}
+@media(max-width:700px){#page-second .stamp-page{padding:14px 13px 20px!important;border-width:7px!important}#page-second .stamp-pref-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px!important}#page-second .stamp-seal{width:75px!important;height:75px!important}#page-second .stamp-tile{min-height:124px!important;padding:8px 3px!important}#page-second .stamp-name{font-size:10px!important}#page-second .stamp-page:after{display:none}}
+@media(max-width:390px){#page-second .stamp-pref-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+
+/* やわらかな湯めぐり帳：角を丸め、木と和紙の質感を保つ */
+:root{--soft-ink:#654c3b;--soft-line:#c9a67e}
+#page-second{background:radial-gradient(ellipse at 50% 20%,#f9e9cf,#e6c9a6 75%,#bda184)!important}
+#page-second .stamp-page{
+ border:7px solid #9c7556!important;border-radius:25px!important;
+ box-shadow:inset 0 0 0 3px #f9e9cb,0 12px 30px #59412d35!important;
+ background:radial-gradient(ellipse at 80% 10%,#fff1d8,transparent 55%),linear-gradient(125deg,#f6e5c8,#efdab8)!important;
+ overflow:hidden;
+}
+#page-second .stamp-summary>div{border-radius:16px!important;background:linear-gradient(120deg,#fff1d7,#f2dcb9)!important;border-color:#d5b38d!important;box-shadow:0 3px 12px #75533818!important}
+#page-second .stamp-region{border-radius:17px!important;overflow:hidden!important;border:1px solid #d7b78e!important;box-shadow:0 4px 15px #73543d1b!important}
+#page-second .stamp-region>summary{border-radius:15px!important;background:linear-gradient(110deg,#8b5746,#a8755b)!important;border-color:#9a6b50!important;box-shadow:none!important}
+#page-second .stamp-pref{border-radius:16px!important}
+#page-second .stamp-pref>summary{border-radius:11px!important;border-bottom-color:#d6b48e!important}
+#page-second .stamp-pref-grid{gap:13px!important;padding:14px 8px!important}
+#page-second .stamp-tile{
+ border-radius:16px!important;border:1px solid #d5b48d!important;
+ background:radial-gradient(ellipse at 50% 10%,#fff3dd,#f5e2c3 90%)!important;
+ box-shadow:inset 0 0 0 3px #fff4df88,0 4px 10px #7150391b!important;
+ transition:transform .18s ease,box-shadow .18s ease!important;
+}
+#page-second .stamp-tile:hover{transform:translateY(-2px);box-shadow:inset 0 0 0 3px #fff4df88,0 7px 14px #7150392c!important}
+#page-second .stamp-tile.done{border-color:#c68d77!important;background:radial-gradient(ellipse at 50% 5%,#fff0df,#f5ddc7 90%)!important}
+#page-second .stamp-seal{transform:rotate(-4deg)!important}
+#page-second .stamp-tile.done .stamp-seal{transform:rotate(-7deg)!important}
+#page-second .stamp-landscape{opacity:.91;filter:none!important}
+#page-second .stamp-name{color:#5f4938!important}
+/* マップ側も角の硬さを和らげる */
+.map-dock,.list-area,.settings,.dashboard,.region-fold,.pref-fold{border-radius:17px!important}
+.item,.simple-editor,.reviewpanel{border-radius:13px!important}
+button,input{border-radius:11px}
+@media(max-width:700px){#page-second .stamp-page{border-width:5px!important;border-radius:17px!important}#page-second .stamp-pref-grid{gap:8px!important;padding:10px 3px!important}#page-second .stamp-tile{border-radius:12px!important}}
+
+/* Traditional fantasy bathhouse theme, using only local CSS */
+body{background:radial-gradient(ellipse at 15% 20%,#f8d8ae,transparent 35%),linear-gradient(135deg,#f0d4b0,#fff0d4 52%,#e6c6a3)!important;color:#503c30!important}
+header{background:repeating-linear-gradient(90deg,transparent 0 85px,#d6ad6830 86px 88px,transparent 89px 170px),linear-gradient(180deg,#253f3b,#355a4e 60%,#654239)!important;border-bottom:5px solid #bd7b4d!important;box-shadow:0 5px 0 #d6ad68,0 9px 22px #58331f44!important}
+header h1{color:#ffedca!important;font-family:'Yu Mincho','Hiragino Mincho ProN',serif;text-shadow:0 2px 3px #172f2b}
+.page-tab{background:#f8e7c7!important;color:#684331!important;border:1px solid #b17c56!important;border-radius:12px 12px 5px 5px!important}
+.page-tab.active{background:#a6473c!important;color:#fff3d9!important}
+#page-map .map-dock,#page-map .list-area,#page-map .settings,#page-map .dashboard{background:linear-gradient(145deg,#fff5df,#f6e5c8)!important;border:2px solid #d3a77b!important;border-radius:18px!important;box-shadow:0 6px 16px #66442c24,inset 0 0 0 3px #fff7e5!important}
+#page-map .region-fold>summary{background:linear-gradient(90deg,#31574e,#537866)!important;color:#fff2d7!important}
+#page-map .pref-fold>summary{background:linear-gradient(90deg,#efd5aa,#f8e8c9)!important;color:#664b37!important}
+#page-map .item{background:#fff5df!important;border:1px solid #dcb88e!important;border-radius:12px!important}
+#page-map input{background:#fffaf0!important;border:1px solid #cba47d!important;border-radius:10px!important}
+#map{border:4px solid #eed4a8!important;border-radius:14px!important}
+#page-second{background:radial-gradient(circle at 82% 11%,#f8dbab,transparent 29%),linear-gradient(135deg,#5e4439,#b07c56 40%,#5e493a)!important}
+#page-second .stamp-page{background:radial-gradient(ellipse at 50% 12%,#fff4d8,transparent 55%),repeating-linear-gradient(90deg,transparent 0 75px,#ac7b4b12 76px 77px),linear-gradient(120deg,#f3dfb8,#ffecc9 50%,#e9c99d)!important;border:8px solid #895940!important;border-radius:24px!important;box-shadow:inset 0 0 0 3px #dbad70,0 14px 36px #2b201b60!important}
+#page-second .stamp-page:after{content:'♨'!important;writing-mode:horizontal-tb!important;font-size:60px!important;right:22px!important;top:12px!important;opacity:.12!important;color:#9c4b3d!important}
+#page-second .stamp-region{border:1px solid #cba175!important;border-radius:17px!important;overflow:hidden}
+#page-second .stamp-region>summary{background:linear-gradient(90deg,#34594e,#557365)!important;border:0!important;color:#ffebc7!important;border-radius:15px!important;font-family:'Yu Mincho','Hiragino Mincho ProN',serif}
+#page-second .stamp-pref>summary{background:linear-gradient(90deg,#f5dcb4,#faebd1)!important;border:1px solid #d2ab79!important;border-radius:11px!important;padding:9px 12px!important}
+#page-second .stamp-tile{background:linear-gradient(155deg,#fff5df,#f4dfbf)!important;border:1px solid #d3a679!important;border-radius:15px!important;box-shadow:0 3px 8px #7353371e,inset 0 0 0 2px #fff7e9!important;min-height:150px!important}
+#page-second .stamp-tile.done{background:linear-gradient(155deg,#fff1d8,#f6d5b8)!important;border-color:#c98470!important}
+#page-second .stamp-seal,#page-second .stamp-tile.done .stamp-seal{border:3px double currentColor!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;background:transparent!important;box-shadow:inset 0 0 0 3px #fff3da!important;color:#aa9a83!important;width:96px!important;height:96px!important;transform:rotate(-9deg)!important}
+#page-second .stamp-tile.done .stamp-seal{color:#b74d42!important;transform:rotate(-12deg)!important}
+#page-second .stamp-seal:before{display:none!important}
+#page-second .onsen-symbol{font-family:'Noto Sans Symbols 2','Segoe UI Symbol','Yu Gothic',sans-serif!important;font-size:55px!important;font-weight:400!important;line-height:1!important;letter-spacing:0!important;padding:0!important;display:block!important}
+#page-second .stamp-name{color:#5a3d2c!important;font-size:12px!important}
+@media(max-width:700px){#page-second .stamp-seal,#page-second .stamp-tile.done .stamp-seal{width:73px!important;height:73px!important}#page-second .onsen-symbol{font-size:43px!important}#page-second .stamp-tile{min-height:120px!important}}
+/* 温泉名の周囲もカード全体を選択領域にする */
+#page-map .pref-items .item{cursor:pointer;transition:background-color .15s,box-shadow .15s,transform .15s}
+#page-map .pref-items .item:hover{background:#f9e3c4!important;box-shadow:0 4px 12px #7650352a!important}
+#page-map .pref-items .item>div:first-child{flex:1;min-width:0;align-self:stretch;display:flex;align-items:center}
+#page-map .pref-items .item .place-link{display:flex;align-items:center;width:100%;min-height:42px;padding:5px 2px;text-decoration:none!important;white-space:normal;line-height:1.5}
+#page-map .pref-items .item .place-link:focus-visible{outline:2px solid #a64d3b;outline-offset:2px;border-radius:5px}
+#page-map .pref-items .item .visit-choice button{cursor:pointer}
+
+/* 温泉クエスト：丸ゴシックと遊び心のある冒険手帳 */
+:root,body,button,input,select,summary{font-family:'Hiragino Maru Gothic ProN','Yu Gothic UI','Meiryo','Noto Sans JP',system-ui,sans-serif!important}
+body{background:radial-gradient(circle at 8% 10%,#ffe3b3 0,transparent 28%),radial-gradient(circle at 95% 72%,#c6dfce 0,transparent 32%),#f8edda!important}
+header{background:linear-gradient(115deg,#245d58,#3b7663 70%,#8a6645)!important;border-bottom:5px solid #e4b96f!important}
+header h1{font-family:inherit!important;font-weight:900!important;letter-spacing:.02em!important;text-shadow:0 2px 2px #1d3833!important}
+.page-tab{font-family:inherit!important;font-weight:900!important;border-radius:22px!important;box-shadow:0 3px 0 #65482e3b!important}
+.page-tab.active{background:linear-gradient(180deg,#d66e51,#a7443b)!important;border-color:#efc58a!important}
+button{border-radius:14px!important;font-weight:700}
+button.primary,.primary{background:linear-gradient(180deg,#e67e58,#b65042)!important;border-color:#a9473c!important;color:#fff!important;box-shadow:0 3px 0 #84392c50}
+button:hover{filter:brightness(1.06)}input,select{border-radius:13px!important}
+.map-dock,.list-area,.settings,.dashboard,.reviewpanel{border-radius:22px!important;border-color:#d5b68c!important;box-shadow:0 6px 17px #745b3b1c!important}
+.region-fold,.pref-fold,.stamp-region,.stamp-pref{border-radius:18px!important}
+.region-fold>.region-heading,.stamp-region>summary{font-family:inherit!important;font-weight:900!important;letter-spacing:.01em!important;background:linear-gradient(100deg,#448775,#6ca28a)!important;color:#fff8dc!important;text-shadow:0 1px 1px #285448!important;border-radius:15px!important}
+.pref-fold>.pref-heading,.stamp-pref>summary{font-family:inherit!important;font-weight:800!important;background:linear-gradient(100deg,#ffe5af,#f5cf9e)!important;color:#6b4932!important;border-radius:12px!important}
+.item,.stamp-tile{border-radius:17px!important;transition:transform .15s,box-shadow .15s!important}
+.item:hover,.stamp-tile:hover{transform:translateY(-2px);box-shadow:0 5px 12px #72533825!important}
+.place-link,.item strong,.stamp-name{font-family:inherit!important;font-weight:800!important}
+.item.active{outline:3px solid #e8b953!important;background:#fff2c9!important}
+#page-second{background:linear-gradient(130deg,#a47c5a,#e1b987 48%,#96765e)!important}
+#page-second .stamp-page{border-radius:27px!important;border:8px solid #bd8d62!important;background:radial-gradient(circle at 85% 12%,#fff6d8,transparent 35%),linear-gradient(145deg,#ffefd1,#f7dfb8)!important;box-shadow:inset 0 0 0 3px #fff2d8,0 12px 30px #4e382b55!important}
+#page-second .stamp-region>summary{background:linear-gradient(100deg,#3e8572,#6da28b)!important;border-radius:16px!important}
+#page-second .stamp-pref>summary{background:linear-gradient(100deg,#f6d7a3,#ffeac5)!important;border-radius:13px!important}
+#page-second .stamp-tile{border-radius:18px!important;background:linear-gradient(155deg,#fff8e9,#f9e8c8)!important;border:2px solid #e5c59c!important}
+#page-second .stamp-tile.done{border-color:#d58a78!important;background:#fff0d9!important}
+#page-second .stamp-name{font-family:inherit!important}
+#page-second .stamp-seal{border-radius:50%!important}.stamp-summary>div{border-radius:18px!important}
+@media(max-width:650px){header h1{font-size:19px!important}.page-tab{border-radius:15px!important}#page-second .stamp-page{border-width:5px!important}}
+</style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1><nav class="page-menu" aria-label="ページ切り替え"><button type="button" class="page-tab active" data-page="map" aria-current="page">🗺️ 温泉マップ</button><button type="button" class="page-tab" data-page="second">♨️ スタンプカード</button></nav></div></header><main class="wrap"><div id="page-map"><div class="workspace">
  <div class="map-dock">
-  <div class="map-topline"><span class="eyebrow">JAPAN ONSEN JOURNAL</span><span class="map-legend"><i class="dot red"></i>訪問済み <i class="dot green"></i>未訪問 <i class="dot gold"></i>位置未確認</span></div>
   <div id="map"></div>
   <div class="dashboard">
    <div class="stats"><div class="stat"><small>登録温泉</small><b id="total">0</b><span>SPOTS</span></div><div class="stat"><small>訪問済み</small><b id="visited">0</b><span>VISITED</span></div><div class="stat"><small>達成率</small><b id="rate">0%</b><span>PROGRESS</span></div></div>
    <div class="progress"><div id="progressbar"></div></div>
    <div class="toolbar"><input id="search" placeholder="🔎 温泉名・都道府県で検索" aria-label="温泉を検索"><select id="filter" aria-label="訪問状況で絞り込み"><option value="all">すべて</option><option value="yes">訪問済み</option><option value="no">未訪問</option><option value="missing">位置未登録</option><option value="pending">位置未確定</option></select><button id="locate">検索</button></div>
-   <p class="status" id="status" role="status">温泉を選択すると、地図上で位置を確認できます。</p>
-   <details class="reviewpanel" id="review-details"><summary>📍 位置の確認・修正 <span class="sub" id="geostats">読み込み中</span></summary><div id="review"></div></details>
+   <p class="status" id="status" role="status">温泉を選択すると、位置情報を修正できます。</p>
+   <details class="reviewpanel" id="review-details"><summary>📍 位置の修正</summary><div id="review"></div></details>
   </div>
  </div>
  <div class="list-area">
-  <div class="list-title"><div><span class="eyebrow">YOUR JOURNEY</span><h2>温泉一覧</h2></div><span class="sub">地方・都道府県別</span></div>
+  
   <div class="grid" id="list"></div>
-  <details class="reviewpanel" id="missing-details" open><summary>📍 位置未登録の温泉 <span class="sub" id="missing-count"></span></summary><div id="missing-list"></div></details>
-  <p class="note">🟢 未訪問　🔴 訪問済み　🟡 位置未確認。温泉名を選択すると地図上で強調表示します。位置の変更は「位置の確認・修正」から行えます。</p>
+  <details class="reviewpanel" id="missing-details"><summary>📍 位置未登録の温泉 <span class="sub" id="missing-count"></span></summary><div id="missing-list"></div></details>
  </div>
-</div><div class="connection-footer"><section class="settings"><b>クラウド接続</b><p class="sub">Firebase Realtime Database のURLを入力してください（設定後はこの端末に記憶）。</p><div class="toolbar"><input id="dburl" placeholder="https://YOUR-DATABASE.firebasedatabase.app" aria-label="データベースURL"><button class="primary" id="connect">接続する</button></div><div class="status" id="connection">未接続：訪問記録は共有されません</div></section></div></div><section id="page-second" hidden><div class="stamp-page"><div class="stamp-hero"><span class="stamp-eyebrow">JAPAN ONSEN STAMP JOURNAL</span><h2>♨️ 全国温泉スタンプカード</h2><p>訪れた温泉の思い出を、ひとつずつ集めよう。</p></div><div class="stamp-summary"><div><small>集めたスタンプ</small><strong id="stamp-visited">0</strong><span id="stamp-total"> / 100</span></div><div><small>全国達成率</small><strong id="stamp-rate">0%</strong></div></div><p class="stamp-help">赤いスタンプは訪問済み、薄いスタンプは未訪問です。訪問状況は「温泉マップ」ページと連動します。</p><div id="stamp-regions"></div></div></section></main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
+</div><div class="connection-footer"><section class="settings"><b>クラウド接続</b><p class="sub">Firebase Realtime Database のURLを入力してください（設定後はこの端末に記憶）。</p><div class="toolbar"><input id="dburl" placeholder="https://YOUR-DATABASE.firebasedatabase.app" aria-label="データベースURL"><button class="primary" id="connect">接続する</button></div><div class="status" id="connection">未接続：訪問記録は共有されません</div></section></div></div><section id="page-second" hidden><div class="stamp-page"><div class="stamp-summary"><div><small>🌸 集めたスタンプ</small><strong id="stamp-visited">0</strong><span id="stamp-total"> / 100</span></div></div><div id="stamp-regions"></div></div></section></main><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
 document.querySelectorAll('.page-tab').forEach(btn=>btn.addEventListener('click',()=>{const page=btn.dataset.page;document.getElementById('page-map').hidden=page!=='map';document.getElementById('page-second').hidden=page!=='second';document.querySelectorAll('.page-tab').forEach(b=>{b.classList.toggle('active',b===btn);if(b===btn)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});if(page==='map')setTimeout(()=>map.invalidateSize(),0);else renderStamps()}));
 const PLACES=[{"id": "onsen_001", "name": "登別温泉", "pref": "北海道", "mapName": "登別温泉"}, {"id": "onsen_002", "name": "平磯温泉", "pref": "北海道", "mapName": "料亭湯宿 銀鱗荘"}, {"id": "onsen_003", "name": "十勝川温泉", "pref": "北海道", "mapName": "十勝川温泉"}, {"id": "onsen_004", "name": "定山渓温泉", "pref": "北海道", "mapName": "定山渓温泉"}, {"id": "onsen_005", "name": "阿寒湖温泉", "pref": "北海道", "mapName": "阿寒湖温泉"}, {"id": "onsen_006", "name": "湯の川温泉", "pref": "北海道", "mapName": "湯の川温泉"}, {"id": "onsen_007", "name": "層雲峡温泉", "pref": "北海道", "mapName": "層雲峡温泉"}, {"id": "onsen_008", "name": "洞爺湖温泉", "pref": "北海道", "mapName": "洞爺湖温泉"}, {"id": "onsen_009", "name": "川湯温泉", "pref": "北海道", "mapName": "川湯温泉"}, {"id": "onsen_010", "name": "ウトロ温泉", "pref": "北海道", "mapName": "ウトロ温泉"}, {"id": "onsen_011", "name": "ニセコ温泉郷", "pref": "北海道", "mapName": "ニセコ温泉郷"}, {"id": "onsen_012", "name": "酸ヶ湯温泉", "pref": "青森県", "mapName": "酸ヶ湯温泉旅館"}, {"id": "onsen_013", "name": "黄金崎不老ふ死温泉", "pref": "青森県", "mapName": "黄金崎不老ふ死温泉"}, {"id": "onsen_014", "name": "花巻温泉郷", "pref": "岩手県", "mapName": "花巻温泉 ホテル紅葉館"}, {"id": "onsen_015", "name": "つなぎ温泉", "pref": "岩手県", "mapName": "繋温泉"}, {"id": "onsen_016", "name": "秋保温泉", "pref": "宮城県", "mapName": "秋保温泉"}, {"id": "onsen_017", "name": "鳴子温泉", "pref": "宮城県", "mapName": "鳴子温泉"}, {"id": "onsen_018", "name": "松島温泉", "pref": "宮城県", "mapName": "松島温泉"}, {"id": "onsen_019", "name": "作並温泉", "pref": "宮城県", "mapName": "作並温泉"}, {"id": "onsen_020", "name": "乳頭温泉郷", "pref": "秋田県", "mapName": "乳頭温泉郷 鶴の湯温泉"}, {"id": "onsen_021", "name": "玉川温泉", "pref": "秋田県", "mapName": "玉川温泉"}, {"id": "onsen_022", "name": "銀山温泉", "pref": "山形県", "mapName": "銀山温泉"}, {"id": "onsen_023", "name": "蔵王温泉", "pref": "山形県", "mapName": "蔵王温泉"}, {"id": "onsen_024", "name": "あつみ温泉", "pref": "山形県", "mapName": "あつみ温泉"}, {"id": "onsen_025", "name": "かみのやま温泉", "pref": "山形県", "mapName": "上山温泉"}, {"id": "onsen_026", "name": "母畑温泉", "pref": "福島県", "mapName": "母畑温泉"}, {"id": "onsen_027", "name": "高湯温泉", "pref": "福島県", "mapName": "高湯温泉"}, {"id": "onsen_028", "name": "芦ノ牧温泉", "pref": "福島県", "mapName": "芦ノ牧温泉"}, {"id": "onsen_029", "name": "飯坂温泉", "pref": "福島県", "mapName": "飯坂温泉"}, {"id": "onsen_030", "name": "東山温泉", "pref": "福島県", "mapName": "東山温泉"}, {"id": "onsen_031", "name": "鬼怒川・川治温泉", "pref": "栃木県", "mapName": "鬼怒川温泉"}, {"id": "onsen_032", "name": "湯西川温泉", "pref": "栃木県", "mapName": "湯西川温泉"}, {"id": "onsen_033", "name": "那須温泉", "pref": "栃木県", "mapName": "那須湯本温泉"}, {"id": "onsen_034", "name": "奥日光湯元温泉", "pref": "栃木県", "mapName": "奥日光湯元温泉源泉"}, {"id": "onsen_035", "name": "塩原温泉", "pref": "栃木県", "mapName": "塩原温泉 渓雲閣"}, {"id": "onsen_036", "name": "日光温泉", "pref": "栃木県", "mapName": "日光温泉 ほの香"}, {"id": "onsen_037", "name": "草津温泉", "pref": "群馬県", "mapName": "草津温泉"}, {"id": "onsen_038", "name": "伊香保温泉", "pref": "群馬県", "mapName": "伊香保温泉"}, {"id": "onsen_039", "name": "万座温泉", "pref": "群馬県", "mapName": "万座温泉"}, {"id": "onsen_040", "name": "四万温泉", "pref": "群馬県", "mapName": "四万温泉"}, {"id": "onsen_041", "name": "みなかみ18湯", "pref": "群馬県", "mapName": "水上温泉"}, {"id": "onsen_042", "name": "箱根温泉", "pref": "神奈川県", "mapName": "箱根温泉"}, {"id": "onsen_043", "name": "湯河原温泉", "pref": "神奈川県", "mapName": "湯河原温泉"}, {"id": "onsen_044", "name": "月岡温泉", "pref": "新潟県", "mapName": "月岡温泉"}, {"id": "onsen_045", "name": "越後湯沢温泉", "pref": "新潟県", "mapName": "越後湯沢温泉"}, {"id": "onsen_046", "name": "松之山温泉", "pref": "新潟県", "mapName": "松之山温泉"}, {"id": "onsen_047", "name": "富士山石和温泉", "pref": "山梨県", "mapName": "石和温泉みなもと旅館"}, {"id": "onsen_048", "name": "河口湖温泉", "pref": "山梨県", "mapName": "河口湖温泉"}, {"id": "onsen_049", "name": "上諏訪温泉", "pref": "長野県", "mapName": "上諏訪温泉"}, {"id": "onsen_050", "name": "昼神温泉", "pref": "長野県", "mapName": "昼神温泉"}, {"id": "onsen_051", "name": "白骨温泉", "pref": "長野県", "mapName": "白骨温泉"}, {"id": "onsen_052", "name": "湯田中渋温泉郷", "pref": "長野県", "mapName": "湯田中渋温泉郷"}, {"id": "onsen_053", "name": "別所温泉", "pref": "長野県", "mapName": "別所温泉"}, {"id": "onsen_054", "name": "野沢温泉", "pref": "長野県", "mapName": "野沢温泉村"}, {"id": "onsen_055", "name": "扉温泉", "pref": "長野県", "mapName": "扉温泉明神館"}, {"id": "onsen_056", "name": "宇奈月温泉", "pref": "富山県", "mapName": "宇奈月温泉"}, {"id": "onsen_057", "name": "金太郎温泉", "pref": "富山県", "mapName": "金太郎温泉 光風閣"}, {"id": "onsen_058", "name": "和倉温泉", "pref": "石川県", "mapName": "和倉温泉"}, {"id": "onsen_059", "name": "山代温泉", "pref": "石川県", "mapName": "山代温泉"}, {"id": "onsen_060", "name": "山中温泉", "pref": "石川県", "mapName": "山中温泉"}, {"id": "onsen_061", "name": "あわら温泉", "pref": "福井県", "mapName": "芦原温泉"}, {"id": "onsen_062", "name": "下呂温泉", "pref": "岐阜県", "mapName": "下呂温泉"}, {"id": "onsen_063", "name": "奥飛騨温泉郷", "pref": "岐阜県", "mapName": "奥飛騨温泉郷 新穂高温泉"}, {"id": "onsen_064", "name": "飛騨高山温泉", "pref": "岐阜県", "mapName": "飛騨高山温泉 ひだホテルプラザ"}, {"id": "onsen_065", "name": "長良川温泉", "pref": "岐阜県", "mapName": "長良川温泉"}, {"id": "onsen_066", "name": "熱海温泉", "pref": "静岡県", "mapName": "熱海温泉"}, {"id": "onsen_067", "name": "修善寺温泉", "pref": "静岡県", "mapName": "修善寺温泉"}, {"id": "onsen_068", "name": "稲取温泉", "pref": "静岡県", "mapName": "稲取温泉"}, {"id": "onsen_069", "name": "伊東温泉", "pref": "静岡県", "mapName": "伊東温泉"}, {"id": "onsen_070", "name": "観音温泉", "pref": "静岡県", "mapName": "観音温泉"}, {"id": "onsen_071", "name": "下田温泉", "pref": "静岡県", "mapName": "下田温泉"}, {"id": "onsen_072", "name": "浜名湖かんざんじ温泉", "pref": "静岡県", "mapName": "舘山寺温泉"}, {"id": "onsen_073", "name": "鳥羽温泉郷", "pref": "三重県", "mapName": "鳥羽本浦温泉"}, {"id": "onsen_074", "name": "長島温泉", "pref": "三重県", "mapName": "長島温泉 湯あみの島"}, {"id": "onsen_075", "name": "おごと温泉", "pref": "滋賀県", "mapName": "雄琴温泉"}, {"id": "onsen_076", "name": "有馬温泉", "pref": "兵庫県", "mapName": "有馬温泉"}, {"id": "onsen_077", "name": "城崎温泉", "pref": "兵庫県", "mapName": "城崎温泉"}, {"id": "onsen_078", "name": "洲本温泉", "pref": "兵庫県", "mapName": "洲本温泉うるおいの湯 足湯"}, {"id": "onsen_079", "name": "湯村温泉", "pref": "兵庫県", "mapName": "湯村温泉"}, {"id": "onsen_080", "name": "白浜温泉", "pref": "和歌山県", "mapName": "南紀白浜温泉"}, {"id": "onsen_081", "name": "南紀勝浦温泉", "pref": "和歌山県", "mapName": "南紀勝浦温泉"}, {"id": "onsen_082", "name": "三朝温泉", "pref": "鳥取県", "mapName": "三朝温泉"}, {"id": "onsen_083", "name": "皆生温泉", "pref": "鳥取県", "mapName": "皆生温泉"}, {"id": "onsen_084", "name": "玉造温泉", "pref": "島根県", "mapName": "玉造温泉"}, {"id": "onsen_085", "name": "長門湯本温泉", "pref": "山口県", "mapName": "長門湯本温泉"}, {"id": "onsen_086", "name": "湯田温泉", "pref": "山口県", "mapName": "湯田温泉"}, {"id": "onsen_087", "name": "祖谷温泉", "pref": "徳島県", "mapName": "和の宿 ホテル祖谷温泉 Hotel Iyaonsen"}, {"id": "onsen_088", "name": "こんぴら温泉郷", "pref": "香川県", "mapName": "こんぴら温泉湯元八千代"}, {"id": "onsen_089", "name": "道後温泉", "pref": "愛媛県", "mapName": "道後温泉本館"}, {"id": "onsen_090", "name": "嬉野温泉", "pref": "佐賀県", "mapName": "嬉野温泉"}, {"id": "onsen_091", "name": "雲仙温泉", "pref": "長崎県", "mapName": "雲仙温泉"}, {"id": "onsen_092", "name": "黒川温泉", "pref": "熊本県", "mapName": "黒川温泉"}, {"id": "onsen_093", "name": "人吉温泉", "pref": "熊本県", "mapName": "人吉温泉 元湯"}, {"id": "onsen_094", "name": "山鹿・平山温泉", "pref": "熊本県", "mapName": "平山温泉 元湯"}, {"id": "onsen_095", "name": "阿蘇温泉郷", "pref": "熊本県", "mapName": "亀の井ホテル 阿蘇"}, {"id": "onsen_096", "name": "別府八湯温泉", "pref": "大分県", "mapName": "別府温泉"}, {"id": "onsen_097", "name": "由布院温泉", "pref": "大分県", "mapName": "別府八湯温泉"}, {"id": "onsen_098", "name": "奥日田温泉", "pref": "大分県", "mapName": "奥日田温泉 うめひびき"}, {"id": "onsen_099", "name": "指宿温泉", "pref": "鹿児島県", "mapName": "指宿温泉"}, {"id": "onsen_100", "name": "霧島温泉", "pref": "鹿児島県", "mapName": "霧島温泉郷（丸尾周辺）"}];
 const $=id=>document.getElementById(id),map=L.map('map',{scrollWheelZoom:true}).setView([36.4,137.7],5);L.tileLayer('https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png',{attribution:'地図：<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>',maxZoom:18}).addTo(map);
 let tapPlacementId=null,syncing=false,editingId=null,selectedId=null,dirtyIds=new Set(),visits={},db='',markers={},coords={},verified={},bulkStop=false,bulkRunning=false;try{coords=JSON.parse(localStorage.getItem('onsen_coords_v1')||'{}')}catch{};
 function safe(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function normalize(s){return s.trim().replace(/\/+$/,'')}
+function searchText(s){return String(s||'').normalize('NFKC').toLocaleLowerCase('ja').replace(/[\s\u3000]+/g,'')}
+function matchesSearch(p,q){const term=searchText(q);return !term||[p.name,p.pref,p.mapName].some(v=>searchText(v).includes(term))}
 function validUrl(u){try{let x=new URL(u);return x.protocol==='https:'&&/\.firebasedatabase\.app$|\.firebaseio\.com$/.test(x.hostname)}catch{return false}}
 function endpoint(id){return db+'/visits'+(id?'/'+encodeURIComponent(id):'')+'.json'}
 function coordsEndpoint(id){return db+'/coordinates'+(id?'/'+encodeURIComponent(id):'')+'.json'}
@@ -134,7 +388,7 @@ function icon(yes,pending=false,highlight=false){return L.divIcon({className:'',
 function visitChoices(id){return '<span class="visit-choice" role="group" aria-label="訪問状況"><button type="button" data-visit="no" data-id="'+id+'" aria-pressed="'+(!visits[id])+'">未</button><button type="button" data-visit="yes" data-id="'+id+'" aria-pressed="'+(!!visits[id])+'">済</button></span>'}
 function popup(p){return '<b>'+safe(p.name)+'</b><div>'+safe(p.pref)+'</div>'+visitChoices(p.id)}
 document.addEventListener('click',e=>{const b=e.target.closest('.leaflet-popup button[data-visit]');if(b)setVisit(b.dataset.id,b.dataset.visit==='yes')});
-function updatePins(){for(const p of PLACES){if(!coords[p.id])continue;if(!markers[p.id]){markers[p.id]=L.marker(coords[p.id],{icon:icon(visits[p.id],false,selectedId===p.id),draggable:false}).addTo(map);markers[p.id].on('dragend',()=>{const ll=markers[p.id].getLatLng();coords[p.id]=[ll.lat,ll.lng];verified[p.id]=false;dirtyIds.add(p.id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();$('status').textContent=p.name+' の位置を変更しました。下の「この位置で確定・共有」を押してください。';})}markers[p.id].dragging[editingId===p.id?'enable':'disable']();markers[p.id].setLatLng(coords[p.id]);markers[p.id].setIcon(icon(visits[p.id],!verified[p.id],selectedId===p.id));markers[p.id].bindPopup(popup(p))}}
+function updatePins(){for(const p of PLACES){if(!coords[p.id])continue;if(!markers[p.id]){markers[p.id]=L.marker(coords[p.id],{icon:icon(visits[p.id],false,selectedId===p.id),draggable:false}).addTo(map);markers[p.id].on('dragend',()=>{const ll=markers[p.id].getLatLng();coords[p.id]=[ll.lat,ll.lng];verified[p.id]=false;dirtyIds.add(p.id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();$('status').textContent=p.name+' の位置を変更しました。下の「この位置で確定・共有」を押してください。';})}markers[p.id].setLatLng(coords[p.id]);markers[p.id].setIcon(icon(visits[p.id],!verified[p.id],selectedId===p.id));markers[p.id].bindPopup(popup(p))}}
 const REGIONS=[['北海道',['北海道']],['東北地方',['青森県','岩手県','宮城県','秋田県','山形県','福島県']],['関東地方',['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']],['中部地方',['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県']],['近畿地方',['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']],['中国地方',['鳥取県','島根県','岡山県','広島県','山口県']],['四国地方',['徳島県','香川県','愛媛県','高知県']],['九州・沖縄地方',['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']]];
 function placeItem(p){return '<div class="item '+(selectedId===p.id?'active':'')+'"><div><button class="place-link" data-select="'+p.id+'">・'+safe(p.name)+'</button>'+'</div><div>'+visitChoices(p.id)+'</div></div>'}
 const closedPrefs=new Set(PLACES.map(p=>p.pref)),closedRegions=new Set(REGIONS.map(r=>r[0]));
@@ -146,28 +400,37 @@ $('list').addEventListener('toggle',e=>{
   else closedPrefs.add(el.dataset.pref);
  }
 },true);
-function render(){stats();if(!$('page-second').hidden)renderStamps();let q=$('search').value.toLowerCase().trim(),f=$('filter').value;let found=PLACES.filter(p=>(p.name+' '+p.pref+' '+p.mapName).toLowerCase().includes(q)&&(f==='all'||f==='missing'&&!coords[p.id]||f==='pending'&&coords[p.id]&&!verified[p.id]||(f==='yes'||f==='no')&&((f==='yes')===!!visits[p.id])));let html='';for(const [region,prefs] of REGIONS){let blocks='';for(const pref of prefs){const items=found.filter(p=>p.pref===pref);if(items.length)blocks+='<details class="pref-section pref-fold" data-pref="'+safe(pref)+'" '+(closedPrefs.has(pref)?'':'open')+'><summary class="pref-heading">'+safe(pref)+' <small>('+items.length+'件)</small></summary><div class="pref-items">'+items.map(placeItem).join('')+'</div></details>'}if(blocks)html+='<details class="region-section region-fold" data-region="'+safe(region)+'" '+(closedRegions.has(region)?'':'open')+'><summary class="region-heading">'+safe(region)+'</summary><div class="region-content">'+blocks+'</div></details>'}const others=found.filter(p=>!REGIONS.some(r=>r[1].includes(p.pref)));if(others.length)html+='<section class="region-section"><h2 class="region-heading">【その他】</h2><div class="pref-items">'+others.map(placeItem).join('')+'</div></section>';$('list').innerHTML=html||'<p>該当する温泉がありません。</p>';updatePins();updateReview()}
+function render(){stats();if(!$('page-second').hidden)renderStamps();let q=$('search').value.toLowerCase().trim(),f=$('filter').value;let found=PLACES.filter(p=>matchesSearch(p,q)&&(f==='all'||f==='missing'&&!coords[p.id]||f==='pending'&&coords[p.id]&&!verified[p.id]||(f==='yes'||f==='no')&&((f==='yes')===!!visits[p.id])));let html='';for(const [region,prefs] of REGIONS){let blocks='';for(const pref of prefs){const items=found.filter(p=>p.pref===pref);if(items.length)blocks+='<details class="pref-section pref-fold" data-pref="'+safe(pref)+'" '+(q? 'open' : closedPrefs.has(pref)?'':'open')+'><summary class="pref-heading">'+safe(pref)+' <small>('+items.length+'件)</small></summary><div class="pref-items">'+items.map(placeItem).join('')+'</div></details>'}if(blocks)html+='<details class="region-section region-fold" data-region="'+safe(region)+'" '+(q? 'open' : closedRegions.has(region)?'':'open')+'><summary class="region-heading">'+safe(region)+'</summary><div class="region-content">'+blocks+'</div></details>'}const others=found.filter(p=>!REGIONS.some(r=>r[1].includes(p.pref)));if(others.length)html+='<section class="region-section"><h2 class="region-heading">【その他】</h2><div class="pref-items">'+others.map(placeItem).join('')+'</div></section>';$('list').innerHTML=html||'<p>該当する温泉がありません。</p>';updatePins();updateReview()}
 
-const stampClosedRegions=new Set(REGIONS.map(r=>r[0])),stampClosedPrefs=new Set(PLACES.map(p=>p.pref));
+const stampClosedRegions=new Set(),stampClosedPrefs=new Set();
 $('stamp-regions').addEventListener('toggle',e=>{const d=e.target;if(d.matches?.('details[data-stamp-region]')){if(d.open)stampClosedRegions.delete(d.dataset.stampRegion);else stampClosedRegions.add(d.dataset.stampRegion)}if(d.matches?.('details[data-stamp-pref]')){if(d.open)stampClosedPrefs.delete(d.dataset.stampPref);else stampClosedPrefs.add(d.dataset.stampPref)}},true);
+function stampScene(index){
+ const variants=[
+ '<path d="M9 54L27 32 42 49 59 22 83 55M14 61Q45 51 77 62M20 69Q46 59 72 69M33 50h25v16H33zM30 50l16-12 15 12M42 51v15M50 51v15"/>',
+ '<path d="M9 60Q28 44 43 57T83 52M8 70Q45 56 83 68M23 51h43v17H23zM18 50l27-20 26 20M33 52v16M45 52v16M57 52v16"/>',
+ '<path d="M8 54L29 32 46 50 66 24 83 51M10 69Q45 58 82 68M16 59Q45 40 75 59M18 61Q45 44 73 61M25 61v10M64 61v10"/>',
+ '<path d="M9 63Q21 38 36 62M53 64Q65 37 82 61M7 72Q45 61 84 72M28 65V43h35v22M25 43l20-15 21 15M39 45v20M52 45v20"/>'
+ ];
+ return '<svg class="stamp-landscape" viewBox="0 0 92 92" aria-hidden="true"><circle cx="46" cy="46" r="42" stroke-width="1.5"/><circle cx="46" cy="46" r="38" stroke-width=".8"/>'+variants[index%4]+'</svg>';
+}
 function renderStamps(){
  const n=PLACES.filter(p=>visits[p.id]===true).length;
- $('stamp-visited').textContent=n;$('stamp-total').textContent=' / '+PLACES.length;$('stamp-rate').textContent=Math.round(n/PLACES.length*100)+'%';
+ $('stamp-visited').textContent=n;$('stamp-total').textContent=' / '+PLACES.length;
  let html='';
  for(const [region,prefs] of REGIONS){
   let prefHtml='';
   for(const pref of prefs){
    const items=PLACES.filter(p=>p.pref===pref);if(!items.length)continue;
-   const stamps=items.map(p=>'<div class="stamp-tile '+(visits[p.id]?'done':'')+'" title="'+safe(p.pref+' '+p.name)+'"><div class="stamp-seal"><span>'+(visits[p.id]?'訪問済':'未訪問')+'</span></div><div class="stamp-name">'+safe(p.name)+'</div></div>').join('');
-   const minis=items.map(p=>'<span class="stamp-mini '+(visits[p.id]?'done':'')+'" title="'+safe(p.name)+'">♨</span>').join('');
-   prefHtml+='<details class="stamp-pref" data-stamp-pref="'+safe(pref)+'" '+(stampClosedPrefs.has(pref)?'':'open')+'><summary>'+safe(pref)+' <span class="stamp-count" aria-label="温泉ごとのスタンプ">'+minis+'</span></summary><div class="stamp-pref-grid">'+stamps+'</div></details>';
+   const stamps=items.map(p=>'<div class="stamp-tile '+(visits[p.id]?'done':'')+'" title="'+safe(p.pref+' '+p.name)+'"><div class="stamp-seal"><span class="onsen-symbol" aria-hidden="true">♨</span></div><div class="stamp-name">'+safe(p.name)+'</div></div>').join('');
+   const minis=items.map(p=>'<span class="stamp-mini '+(visits[p.id]?'done':'')+'" title="'+safe(p.name)+(visits[p.id]?'（訪問済み）':'（未訪問）')+'" aria-label="'+safe(p.name)+(visits[p.id]?' 訪問済み':' 未訪問')+'"></span>').join('');
+   prefHtml+='<details class="stamp-pref" data-stamp-pref="'+safe(pref)+'" '+(stampClosedPrefs.has(pref)?'':'open')+'><summary>'+safe(pref)+'</summary><div class="stamp-pref-grid">'+stamps+'</div></details>';
   }
   if(prefHtml)html+='<details class="stamp-region" data-stamp-region="'+safe(region)+'" '+(stampClosedRegions.has(region)?'':'open')+'><summary>'+safe(region)+'</summary><div class="stamp-region-body">'+prefHtml+'</div></details>';
  }
  $('stamp-regions').innerHTML=html;
 }
 window.setVisit=async function(id,next){if(!db){message('先にFirebaseに接続してください。',true);return}let old=!!visits[id];if(old===next)return;visits[id]=next;render();try{let r=await fetch(endpoint(id),{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(next)});if(!r.ok)throw Error('HTTP '+r.status);$('status').textContent='保存しました。ほかの端末にも反映されます。'}catch(e){visits[id]=old;render();$('status').textContent='保存に失敗しました：'+e.message}}
-$('list').addEventListener('click',e=>{let s=e.target.closest('button[data-select]');if(s){focusPlace(s.dataset.select);return}let b=e.target.closest('button[data-id]');if(b&&b.dataset.visit)setVisit(b.dataset.id,b.dataset.visit==='yes')});$('search').addEventListener('input',render);$('filter').addEventListener('change',render);
+$('list').addEventListener('click',e=>{let b=e.target.closest('button[data-id]');if(b&&b.dataset.visit){setVisit(b.dataset.id,b.dataset.visit==='yes');return}let s=e.target.closest('button[data-select]');if(s){focusPlace(s.dataset.select);return}let card=e.target.closest('.item');if(card){const select=card.querySelector('button[data-select]');if(select)focusPlace(select.dataset.select)}});$('search').addEventListener('input',render);$('filter').addEventListener('change',render);
 async function sync(){if(!db||syncing)return;syncing=true;try{let r=await fetch(endpoint(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);let data=await r.json();visits=data&&typeof data==='object'?data:{};
  let cr=await fetch(coordsEndpoint(),{cache:'no-store'});if(cr.ok){let shared=await cr.json();if(shared&&typeof shared==='object'){for(let [id,v] of Object.entries(shared)){if(Number.isFinite(v?.lat)&&Number.isFinite(v?.lng)){if(!dirtyIds.has(id)){coords[id]=[v.lat,v.lng];verified[id]=true}}}}}render();message('🟢 共有データに接続中・約60秒ごとに更新')}catch(e){message('接続エラー：FirebaseのURLと読み書きルールを確認してください（'+e.message+'）',true)}finally{syncing=false}}
 $('connect').onclick=()=>{let u=normalize($('dburl').value);if(!validUrl(u)){message('Firebase Realtime Databaseのhttps URLを入力してください。',true);return}db=u;localStorage.setItem('onsen_db_url',db);sync()};$('dburl').value=localStorage.getItem('onsen_db_url')||'https://japan-onsen-map-default-rtdb.firebaseio.com/';if($('dburl').value)$('connect').click();setInterval(()=>{if(!document.hidden)sync()},60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
@@ -191,7 +454,7 @@ function focusPlace(id){
  if(coords[id]){
   map.flyTo(coords[id],Math.max(map.getZoom(),12),{duration:0.6});
   updatePins();markers[id]?.openPopup();
-  $('status').textContent=p.name+' の位置を地図で強調表示しました。位置を修正するには「位置を修正」を押してください。';
+  $('status').textContent='';
  }else{
   $('status').textContent=p.name+' は位置未登録です。位置を検索するか、座標を入力してください。';
  }
@@ -203,29 +466,26 @@ function updateReview(){
  $('missing-count').textContent=missing.length+'件';
  $('missing-list').innerHTML=missing.length?missing.map(p=>`<div class="missing-row"><div><b>${safe(p.name)}</b><small>${safe(p.pref)} · 地点名：${safe(p.mapName)}</small></div><div><button data-missing-select="${p.id}">位置を登録</button><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.mapName+' '+p.pref)}" target="_blank" rel="noopener">Googleマップ</a></div></div>`).join(''):'<p class="sub">位置未登録の温泉はありません。</p>';
 
- const pending=PLACES.filter(p=>coords[p.id]&&!verified[p.id]);
- const confirmed=PLACES.filter(p=>verified[p.id]).length;
- $('geostats').textContent=`確定 ${confirmed} / 確認中 ${pending.length} / 未登録 ${PLACES.length-confirmed-pending.length}`;
  const selected=PLACES.find(p=>p.id===selectedId);
  let editor='';
  if(selected){
   const c=coords[selected.id];
   editor=`<div class="editpanel simple-editor">
    <div class="simple-head"><b>${safe(selected.name)}</b><span class="simple-state">${verified[selected.id]?'登録済み':c?'位置を確認中':'位置未登録'}</span></div>
-   <div class="simple-help">スマホでは座標を貼り付けるか、「地図をタップして位置指定」を使えます。PCではピンのドラッグも可能です。</div>
+   <div class="simple-help">座標を貼り付けるか、地図をタップして位置を指定できます。</div>
    <label class="simple-label" for="coord-${selected.id}">緯度・経度</label>
    <input id="coord-${selected.id}" data-coord="${selected.id}" type="text" inputmode="text" placeholder="例：38.225338, 140.727050" aria-label="緯度・経度" autocomplete="off">
    <div class="simple-buttons"><button class="edit-apply" data-paste="${selected.id}">地図に反映</button><button class="primary edit-confirm" data-verify="${selected.id}" ${c?'':'disabled'}>この位置で保存</button></div>
-   <div class="simple-bottom"><button type="button" data-tap="${selected.id}" aria-pressed="${tapPlacementId===selected.id}">${tapPlacementId===selected.id?'タップ指定を終了':'📍 地図をタップして位置指定'}</button><button data-edit="${selected.id}">ピンのドラッグを有効にする</button><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.mapName+' '+selected.pref)}">Googleマップで確認</a></div>
+   <div class="simple-bottom"><button type="button" data-tap="${selected.id}" aria-pressed="${tapPlacementId===selected.id}">${tapPlacementId===selected.id?'タップ指定を終了':'📍 地図をタップして位置指定'}</button><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selected.mapName+' '+selected.pref)}">Googleマップで確認</a></div>
    <div class="simple-feedback" id="coord-feedback">${c?'現在の位置：'+c[0].toFixed(6)+', '+c[1].toFixed(6):'まだ位置は登録されていません。'}</div>
    </div>`;
  }
- $('review').innerHTML=editor || '<p class="sub">右側の温泉名をクリックするか、検索で温泉を選択すると編集欄が表示されます。</p>';
+ $('review').innerHTML=editor;
 
 }
 $('missing-list').addEventListener('click',e=>{const b=e.target.closest('button[data-missing-select]');if(!b)return;focusPlace(b.dataset.missingSelect);$('review-details').open=true; $('review-details').scrollIntoView({behavior:'smooth',block:'nearest'});});
 $('review').addEventListener('click',async e=>{
- let b=e.target.closest('button');if(!b)return;let id=b.dataset.focus||b.dataset.verify||b.dataset.retry||b.dataset.apply||b.dataset.edit||b.dataset.paste||b.dataset.tap;if(!id)return;
+ let b=e.target.closest('button');if(!b)return;let id=b.dataset.focus||b.dataset.verify||b.dataset.retry||b.dataset.apply||b.dataset.paste||b.dataset.tap;if(!id)return;
  if(b.dataset.tap){
   tapPlacementId=tapPlacementId===id?null:id;selectedId=id;
   render();
@@ -234,12 +494,6 @@ $('review').addEventListener('click',async e=>{
    $('status').textContent='地図上の登録したい場所を1回タップしてください。保存はまだ行われません。';
    document.getElementById('map').scrollIntoView({behavior:'smooth',block:'center'});
   }else $('status').textContent='地図タップ指定を終了しました。';
-  return;
- }
- if(b.dataset.edit){
-  tapPlacementId=null;editingId=id;selectedId=id;
-  if(coords[id]){map.setView(coords[id],14);updatePins();markers[id]?.openPopup();}
-  render();$('status').textContent='編集モード：ピンをドラッグするか、緯度・経度を入力してください。変更を保存するまでは他の端末に反映されません。';
   return;
  }
  if(b.dataset.paste){
@@ -271,5 +525,18 @@ async function locatePlace(p){
  let lat=Number(c[1]),lng=Number(c[0]);if(!(lat>24&&lat<46&&lng>122&&lng<154))throw Error('日本国外の座標');
  coords[p.id]=[lat,lng];localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();return true;
 }
-let busy=false;$('locate').onclick=async()=>{if(busy)return;let q=$('search').value.toLowerCase().trim(),p=PLACES.find(p=>(p.name+' '+p.pref+' '+p.mapName).toLowerCase().includes(q)&&!coords[p.id]);if(!p){$('status').textContent='検索結果の未取得地点がありません';return}busy=true;$('locate').disabled=true;try{await locatePlace(p);map.setView(coords[p.id],12);markers[p.id].openPopup();$('status').textContent=p.name+' の候補を表示しました。Googleマップで位置を照合してください。'}catch(e){$('status').textContent='検索失敗：'+e.message}finally{busy=false;$('locate').disabled=false}};
+$('locate').onclick=()=>{
+ const q=$('search').value.trim();
+ if(!q){$('search').focus();$('status').textContent='温泉名または都道府県の一部を入力してください。';return}
+ const matches=PLACES.filter(p=>matchesSearch(p,q));
+ if(!matches.length){$('status').textContent='一致する温泉が見つかりませんでした。';return}
+ if(matches.length===1){focusPlace(matches[0].id);$('status').textContent='';return}
+ $('status').textContent=matches.length+'件見つかりました。右側の一覧から温泉を選択してください。';
+ const first=matches[0],region=REGIONS.find(r=>r[1].includes(first.pref));
+ if(region)closedRegions.delete(region[0]);
+ closedPrefs.delete(first.pref);render();
+ const firstButton=$('list').querySelector('[data-select="'+first.id+'"]');
+ firstButton?.scrollIntoView({behavior:'smooth',block:'nearest'});
+};
+$('search').addEventListener('keydown',e=>{if(e.key==='Enter')$('locate').click()});
 render();renderStamps();</script></body></html>
