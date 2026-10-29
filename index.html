@@ -354,6 +354,52 @@ button:hover{filter:brightness(1.06)}input,select{border-radius:13px!important}
 #page-second .stamp-name{font-family:inherit!important}
 #page-second .stamp-seal{border-radius:50%!important}.stamp-summary>div{border-radius:18px!important}
 @media(max-width:650px){header h1{font-size:19px!important}.page-tab{border-radius:15px!important}#page-second .stamp-page{border-width:5px!important}}
+
+/* スタンプ獲得状態：色と文字の両方ではっきり識別 */
+#page-second .stamp-tile.done{background:linear-gradient(155deg,#fff0e8,#ffd7c6)!important;border:3px solid #b93d38!important;box-shadow:0 4px 0 #8d332a33,0 5px 13px #7b392a24!important}
+#page-second .stamp-tile:not(.done){background:#f5f0e6!important;border:2px dashed #c5b9a6!important;box-shadow:none!important}
+#page-second .stamp-tile.done .stamp-seal{background:#b93d38!important;color:#fff9eb!important;border:4px double #ffe6c7!important;box-shadow:0 3px 0 #8e302b50!important}
+#page-second .stamp-tile:not(.done) .stamp-seal{background:#ece7de!important;color:#b9afa0!important;border:3px dashed #c4b9aa!important;box-shadow:none!important}
+#page-second .stamp-tile.done .stamp-name{color:#82312d!important}
+#page-second .stamp-tile:not(.done) .stamp-name{color:#8e8375!important}
+#page-second .stamp-status{font-size:11px;font-weight:900;letter-spacing:.02em;padding:3px 9px;border-radius:999px;background:#e8e0d3;color:#80766a;line-height:1.3;white-space:nowrap}
+#page-second .stamp-tile.done .stamp-status{background:#b93d38;color:#fff!important}
+@media(max-width:700px){#page-second .stamp-status{font-size:9px;padding:3px 6px}}
+
+/* Android: 地図を固定せず、温泉一覧まで自然にスクロールできるようにする */
+@media(max-width:899px){
+ #page-map .map-dock{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important;z-index:auto!important;padding:7px!important;border-width:2px!important;margin-bottom:10px!important}
+ #page-map #map{position:relative!important;top:auto!important;height:clamp(170px,28vh,250px)!important;min-height:170px!important;max-height:250px!important;border-width:2px!important;box-shadow:none!important}
+ #page-map .dashboard{padding:5px 1px 0!important}
+ #page-map .stats{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:5px!important;flex-wrap:nowrap!important}
+ #page-map .stat{min-width:0!important;padding:6px 7px!important;border-radius:10px!important;box-shadow:none!important}
+ #page-map .stat small{font-size:11px!important;line-height:1.25!important}
+ #page-map .stat b{font-size:21px!important;line-height:1.15!important;margin:3px 0 0!important}
+ #page-map .stat span{display:none!important}
+ #page-map .progress{margin:6px 0!important;height:4px!important}
+ #page-map .toolbar{margin:7px 0!important;gap:5px!important;flex-wrap:wrap!important}
+ #page-map .toolbar input{min-width:0!important;flex:1 1 48%!important;padding:8px!important;font-size:14px!important}
+ #page-map .toolbar select{flex:0 1 105px!important;min-width:0!important;padding:8px 4px!important;font-size:13px!important}
+ #page-map .toolbar button{padding:8px 10px!important;font-size:13px!important}
+ #page-map #status{min-height:0!important;margin:2px 0!important;font-size:11px!important;line-height:1.3!important}
+ #page-map #status:empty{display:none!important}
+ #page-map #review-details{margin:5px 0 0!important;padding:7px 9px!important}
+ #page-map #review-details>summary{font-size:13px!important}
+ #page-map .list-area{padding:9px!important;border-width:2px!important}
+ #page-map .region-fold{margin:8px 0!important}
+ #page-map .region-fold>.region-heading{padding:10px 12px!important}
+ #page-map .pref-fold>.pref-heading{padding:9px 11px!important}
+ #page-map .pref-fold>.pref-items{padding:7px!important}
+ #page-map .item{padding:8px!important}
+ html{scroll-padding-top:95px!important}
+}
+@media(max-width:420px){
+ header{padding:7px 12px!important}
+ header h1{font-size:18px!important;margin-bottom:2px!important}
+ .page-menu{margin-top:5px!important}
+ .page-tab{padding:6px 10px!important}
+ #page-map #map{height:24vh!important;min-height:155px!important}
+}
 </style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1><nav class="page-menu" aria-label="ページ切り替え"><button type="button" class="page-tab active" data-page="map" aria-current="page">🗺️ 温泉マップ</button><button type="button" class="page-tab" data-page="second">♨️ スタンプカード</button></nav></div></header><main class="wrap"><div id="page-map"><div class="workspace">
  <div class="map-dock">
   <div id="map"></div>
@@ -390,7 +436,7 @@ function popup(p){return '<b>'+safe(p.name)+'</b><div>'+safe(p.pref)+'</div>'+vi
 document.addEventListener('click',e=>{const b=e.target.closest('.leaflet-popup button[data-visit]');if(b)setVisit(b.dataset.id,b.dataset.visit==='yes')});
 function updatePins(){for(const p of PLACES){if(!coords[p.id])continue;if(!markers[p.id]){markers[p.id]=L.marker(coords[p.id],{icon:icon(visits[p.id],false,selectedId===p.id),draggable:false}).addTo(map);markers[p.id].on('dragend',()=>{const ll=markers[p.id].getLatLng();coords[p.id]=[ll.lat,ll.lng];verified[p.id]=false;dirtyIds.add(p.id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();$('status').textContent=p.name+' の位置を変更しました。下の「この位置で確定・共有」を押してください。';})}markers[p.id].setLatLng(coords[p.id]);markers[p.id].setIcon(icon(visits[p.id],!verified[p.id],selectedId===p.id));markers[p.id].bindPopup(popup(p))}}
 const REGIONS=[['北海道',['北海道']],['東北地方',['青森県','岩手県','宮城県','秋田県','山形県','福島県']],['関東地方',['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']],['中部地方',['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県']],['近畿地方',['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']],['中国地方',['鳥取県','島根県','岡山県','広島県','山口県']],['四国地方',['徳島県','香川県','愛媛県','高知県']],['九州・沖縄地方',['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']]];
-function placeItem(p){return '<div class="item '+(selectedId===p.id?'active':'')+'"><div><button class="place-link" data-select="'+p.id+'">・'+safe(p.name)+'</button>'+'</div><div>'+visitChoices(p.id)+'</div></div>'}
+function placeItem(p){return '<div class="item '+(selectedId===p.id?'active':'')+'"><div><button class="place-link" data-select="'+p.id+'">'+safe(p.name)+'</button>'+'</div><div>'+visitChoices(p.id)+'</div></div>'}
 const closedPrefs=new Set(PLACES.map(p=>p.pref)),closedRegions=new Set(REGIONS.map(r=>r[0]));
 $('list').addEventListener('toggle',e=>{
  const el=e.target;
@@ -421,7 +467,7 @@ function renderStamps(){
   let prefHtml='';
   for(const pref of prefs){
    const items=PLACES.filter(p=>p.pref===pref);if(!items.length)continue;
-   const stamps=items.map(p=>'<div class="stamp-tile '+(visits[p.id]?'done':'')+'" title="'+safe(p.pref+' '+p.name)+'"><div class="stamp-seal"><span class="onsen-symbol" aria-hidden="true">♨</span></div><div class="stamp-name">'+safe(p.name)+'</div></div>').join('');
+   const stamps=items.map(p=>'<div class="stamp-tile '+(visits[p.id]?'done':'')+'" title="'+safe(p.pref+' '+p.name)+'"><div class="stamp-seal"><span class="onsen-symbol" aria-hidden="true">♨</span></div><div class="stamp-name">'+safe(p.name)+'</div><div class="stamp-status">'+(visits[p.id]?'✓ 訪問済み':'未訪問')+'</div></div>').join('');
    const minis=items.map(p=>'<span class="stamp-mini '+(visits[p.id]?'done':'')+'" title="'+safe(p.name)+(visits[p.id]?'（訪問済み）':'（未訪問）')+'" aria-label="'+safe(p.name)+(visits[p.id]?' 訪問済み':' 未訪問')+'"></span>').join('');
    prefHtml+='<details class="stamp-pref" data-stamp-pref="'+safe(pref)+'" '+(stampClosedPrefs.has(pref)?'':'open')+'><summary>'+safe(pref)+'</summary><div class="stamp-pref-grid">'+stamps+'</div></details>';
   }
