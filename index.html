@@ -495,14 +495,14 @@ map.on('click',e=>{
  localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));
  tapPlacementId=null;editingId=null;selectedId=id;
  render();map.setView(coords[id],Math.max(map.getZoom(),13));
- $('review-details').open=true;
+
  $('status').textContent='地図のタップ位置を反映しました。「この位置で保存」を押すとFirebaseに共有されます。';
- document.getElementById('review-details').scrollIntoView({behavior:'smooth',block:'nearest'});
+
 });
 function focusPlace(id){
  const p=PLACES.find(x=>x.id===id);if(!p)return;
  selectedId=id;
- $('review-details').open=true;
+
  if(coords[id]){
   map.flyTo(coords[id],Math.max(map.getZoom(),12),{duration:0.6});
   updatePins();markers[id]?.openPopup();
@@ -535,7 +535,7 @@ function updateReview(){
  $('review').innerHTML=editor;
 
 }
-$('missing-list').addEventListener('click',e=>{const b=e.target.closest('button[data-missing-select]');if(!b)return;focusPlace(b.dataset.missingSelect);$('review-details').open=true; $('review-details').scrollIntoView({behavior:'smooth',block:'nearest'});});
+$('missing-list').addEventListener('click',e=>{const b=e.target.closest('button[data-missing-select]');if(!b)return;focusPlace(b.dataset.missingSelect);});
 $('review').addEventListener('click',async e=>{
  let b=e.target.closest('button');if(!b)return;let id=b.dataset.focus||b.dataset.verify||b.dataset.retry||b.dataset.apply||b.dataset.paste||b.dataset.tap;if(!id)return;
  if(b.dataset.tap){
