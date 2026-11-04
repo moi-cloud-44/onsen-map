@@ -428,6 +428,34 @@ button:hover{filter:brightness(1.06)}input,select{border-radius:13px!important}
 @media (max-width:420px){
  #page-map #map{height:clamp(125px,19dvh,175px)!important;min-height:125px!important;max-height:175px!important}
 }
+
+/* Android / mobile: prevent the map panel from occupying the viewport while scrolling */
+@media(max-width:899px){
+ header{position:relative!important;top:auto!important;padding:8px 12px 10px!important}
+ header h1{font-size:18px!important;margin-bottom:4px!important}
+ .page-menu{margin-top:5px!important;gap:7px!important}
+ .page-tab{padding:6px 10px!important;font-size:12px!important}
+ .wrap{padding:8px!important}
+ .workspace{gap:10px!important}
+ .map-dock{position:relative!important;top:auto!important;max-height:none!important;overflow:visible!important;padding:7px!important}
+ #map{height:210px!important;min-height:0!important;max-height:210px!important;position:relative!important;top:auto!important}
+ .dashboard{padding:6px 1px 0!important}
+ .stats{gap:5px!important;flex-wrap:nowrap!important}
+ .stat{padding:5px 7px!important;min-width:0!important}
+ .stat small{font-size:10px!important}
+ .stat b{font-size:18px!important}
+ .stat span{display:none!important}
+ .progress{margin:5px 0!important}
+ .toolbar{margin:5px 0!important;gap:5px!important}
+ .toolbar input,.toolbar select,.toolbar button{min-height:34px!important;padding:6px 8px!important}
+ #search{min-width:0!important;flex:1 1 48%!important;font-size:13px!important}
+ #filter{max-width:32%!important;font-size:12px!important}
+ .status{min-height:0!important;font-size:11px!important}
+ .map-dock .reviewpanel{margin:5px 0 0!important;padding:7px 9px!important}
+ .list-area{padding:8px!important}
+ html{scroll-padding-top:12px!important}
+ .stamp-region,.stamp-pref{scroll-margin-top:12px!important}
+}
 </style></head><body><header><div style="max-width:1120px;margin:auto"><h1>♨️ 全国温泉訪問マップ</h1><nav class="page-menu" aria-label="ページ切り替え"><button type="button" class="page-tab active" data-page="map" aria-current="page">🗺️ 温泉マップ</button><button type="button" class="page-tab" data-page="second">♨️ スタンプカード</button></nav></div></header><main class="wrap"><div id="page-map"><div class="workspace">
  <div class="map-dock">
   <div id="map"></div>
@@ -463,7 +491,7 @@ function visitChoices(id){return '<span class="visit-choice" role="group" aria-l
 function popup(p){return '<b>'+safe(p.name)+'</b><div>'+safe(p.pref)+'</div>'+visitChoices(p.id)}
 document.addEventListener('click',e=>{const b=e.target.closest('.leaflet-popup button[data-visit]');if(b)setVisit(b.dataset.id,b.dataset.visit==='yes')});
 function updatePins(){for(const p of PLACES){if(!coords[p.id])continue;if(!markers[p.id]){markers[p.id]=L.marker(coords[p.id],{icon:icon(visits[p.id],false,selectedId===p.id),draggable:false}).addTo(map);markers[p.id].on('dragend',()=>{const ll=markers[p.id].getLatLng();coords[p.id]=[ll.lat,ll.lng];verified[p.id]=false;dirtyIds.add(p.id);localStorage.setItem('onsen_coords_v1',JSON.stringify(coords));render();$('status').textContent=p.name+' の位置を変更しました。下の「この位置で確定・共有」を押してください。';})}markers[p.id].setLatLng(coords[p.id]);markers[p.id].setIcon(icon(visits[p.id],!verified[p.id],selectedId===p.id));markers[p.id].bindPopup(popup(p))}}
-const REGIONS=[['北海道',['北海道']],['東北地方',['青森県','岩手県','宮城県','秋田県','山形県','福島県']],['関東地方',['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']],['中部地方',['新潟県','富山県','石川県','福井県','山梨県','長野県','岐阜県','静岡県','愛知県']],['近畿地方',['三重県','滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']],['中国地方',['鳥取県','島根県','岡山県','広島県','山口県']],['四国地方',['徳島県','香川県','愛媛県','高知県']],['九州・沖縄地方',['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']]];
+const REGIONS=[['北海道',['北海道']],['東北地方',['青森県','岩手県','宮城県','秋田県','山形県','福島県']],['関東地方',['茨城県','栃木県','群馬県','埼玉県','千葉県','東京都','神奈川県']],['北陸地方',['新潟県','富山県','石川県','福井県']],['甲信地方',['山梨県','長野県']],['東海地方',['岐阜県','静岡県','愛知県','三重県']],['近畿地方',['滋賀県','京都府','大阪府','兵庫県','奈良県','和歌山県']],['中国地方',['鳥取県','島根県','岡山県','広島県','山口県']],['四国地方',['徳島県','香川県','愛媛県','高知県']],['九州・沖縄地方',['福岡県','佐賀県','長崎県','熊本県','大分県','宮崎県','鹿児島県','沖縄県']]];
 function placeItem(p){return '<div class="item '+(selectedId===p.id?'active':'')+'"><div><button class="place-link" data-select="'+p.id+'">'+safe(p.name.replace(/^[\s\u30fb\u2022\u00b7\u2219\u2027\u2024\u2026]+/,''))+'</button>'+'</div><div>'+visitChoices(p.id)+'</div></div>'}
 const closedPrefs=new Set(PLACES.map(p=>p.pref)),closedRegions=new Set(REGIONS.map(r=>r[0]));
 $('list').addEventListener('toggle',e=>{
